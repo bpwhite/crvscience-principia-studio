@@ -1,0 +1,33 @@
+[package]
+name = "principia-studio"
+version = "1.1.0"
+edition = "2021"
+rust-version = "1.81"
+authors = ["Bryan P. White"]
+license = "GPL-3.0-or-later"
+repository = "https://github.com/bpwhite/crvscience-principia-studio"
+homepage = "https://crvscience.com/apps"
+description = "Multithreaded Safe-Rust Computational Mathematics Explorer with Desktop Menu System, 2D/3D egui Workstation, and Headless CLI"
+
+[lib]
+name = "principia_studio"
+path = "src/lib.rs"
+
+[[bin]]
+name = "principia-studio"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+eframe = { version = "0.31", default-features = true }
+egui = "0.31"
+rayon = "1.10"
+rusqlite = { version = "0.32", features = ["bundled"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1

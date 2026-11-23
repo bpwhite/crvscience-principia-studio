@@ -1,0 +1,6 @@
+/target/
+*.pdb
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
