@@ -1,6 +1,6 @@
 # Principia Studio — Scientific Methods & Algorithmic Verification
 
-This document summarizes the mathematical formulations, parallel execution models, and headless invariant checks across all **6 domains** and **19 modules** (`N1..G3`) of Principia Studio (`v1.1.0`). Every core kernel is implemented in safe Rust (`#![forbid(unsafe_code)]`) and parallelized across configurable `rayon::ThreadPool` workers (`execute_module`).
+This document summarizes the mathematical formulations, parallel execution models, and headless invariant checks across all **7 domains** and **22 modules** (`N1..P3`) of Principia Studio (`v1.2.0`). Every core kernel is implemented in safe Rust (`#![forbid(unsafe_code)]`) and parallelized across configurable `rayon::ThreadPool` workers (`execute_module`).
 
 ---
 
@@ -65,8 +65,18 @@ This document summarizes the mathematical formulations, parallel execution model
 
 ---
 
+## Domain 7: Geometric Proofs & Visualizations (`src/geometric_proofs.rs`)
+
+| Code | Module | Mathematical Method & Verification Invariants |
+|---|---|---|
+| `p1` | Area & Dissection Proofs | Bhāskara / Zhoubi Suanjing outer `(a+b)^2` frame enclosing 4 congruent right triangles plus tilted inner `(b-a)^2` square verifying `c^2 = 4(ab/2) + (b-a)^2` to `< 1e-12`; Euclid Elements I.47 altitude shear splitting `c^2` into `c*p = a^2` and `c*q = b^2`; alternating geometric series unit-square halving verifying `S_N = 1 - 2^-N`; exact `u128` Nicomachus cube-to-square gnomon conservation `sum_{k=1..n} k^3 == (n(n+1)/2)^2`. |
+| `p2` | Circle, Conic & Hyperbolic | Archimedes' hexagon-doubling polygon exhaustion (`m = 6*2^k`) enforcing `m*sin(pi/m) < pi < m*tan(pi/m)` with monotonic quadratic gap shrinkage; Thales semicircle dot-product orthogonality (`|PA.PB| < 1e-12`) and Ptolemy cyclic quadrilateral diagonal identity (`|AC||BD| = |AB||CD| + |BC||AD|`); exact 3D Dandelin tangent spheres on an oblique circular cone confirming `|PF_1| + |PF_2| = 2a = (c_{z2}-c_{z1})cos(alpha)` and eccentricity `e = sin(beta)/cos(alpha)`; orthogonal circle Poincaré disk geodesics (`K = -1`) computing positive Gauss-Bonnet angular defect `Area = pi - (alpha + beta + gamma) > 0`. |
+| `p3` | Cavalieri & 3D Polyhedra | Archimedes `1 : 2 : 3` double-cone, sphere, and circumscribed cylinder cross-sectional identity `A_sphere(z) + A_cone(z) = pi*R^2` verified across `z in [-R, R]` with Simpson 3D volume quadrature; all 5 normalized Platonic polyhedra verified directly from 3D face corners for Euler `V - E + F = 2` and Descartes total angular defect `sum delta_v = 4*pi`; 2D/3D Viviani regular simplex perpendicular conservation (`sum d_i == H`); discrete divergence-theorem triangulated 3D torus signed volume convergence against Pappus's Centroid Theorem `V = 2*pi^2 * R * r^2`. |
+
+---
+
 ## Verification & Telemetry Summary
 
 All mathematical invariants are checked automatically via:
-1. [`tests/integration_suite.rs`](../tests/integration_suite.rs) (6 module/persistence integration tests)
-2. [`tests/headless_algorithm_validation.rs`](../tests/headless_algorithm_validation.rs) (6 domain invariant suites + 19-module multi-thread & exporter sweep writing [`validation/principia_studio_validation_summary.json`](../validation/principia_studio_validation_summary.json))
+1. [`tests/integration_suite.rs`](../tests/integration_suite.rs) (6 module/persistence integration tests across all 22 modules)
+2. [`tests/headless_algorithm_validation.rs`](../tests/headless_algorithm_validation.rs) (7 domain invariant suites + 22-module multi-thread & exporter sweep writing [`validation/principia_studio_validation_summary.json`](../validation/principia_studio_validation_summary.json))

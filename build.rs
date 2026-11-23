@@ -49,8 +49,8 @@ fn main() {
         r#"1 ICON "{ico_rc_path}"
 
 1 VERSIONINFO
-FILEVERSION 1,1,0,0
-PRODUCTVERSION 1,1,0,0
+FILEVERSION 1,2,0,0
+PRODUCTVERSION 1,2,0,0
 FILEOS 0x40004
 FILETYPE 0x1
 BEGIN
@@ -60,12 +60,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "CRV Science Network"
             VALUE "FileDescription", "Principia Studio - Multithreaded Safe-Rust Computational Mathematics Explorer"
-            VALUE "FileVersion", "1.1.0.0"
+            VALUE "FileVersion", "1.2.0.0"
             VALUE "InternalName", "principia-studio"
             VALUE "LegalCopyright", "Copyright CRV Science Network (GPL-3.0-or-later)"
             VALUE "OriginalFilename", "principia-studio.exe"
             VALUE "ProductName", "Principia Studio"
-            VALUE "ProductVersion", "1.1.0"
+            VALUE "ProductVersion", "1.2.0"
         END
     END
     BLOCK "VarFileInfo"

@@ -180,7 +180,7 @@ fn test_combinatorics_and_geometry_topology() {
 }
 
 #[test]
-fn test_all_19_modules_execute_and_persist() {
+fn test_all_22_modules_execute_and_persist() {
     let vault = WorksetVault::open_in_memory().expect("in-memory sqlite vault");
     for (idx, &m) in ModuleId::ALL.iter().enumerate() {
         let mut params = ExplorerParams::default_for(m);

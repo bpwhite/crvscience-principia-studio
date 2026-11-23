@@ -11,7 +11,7 @@ use std::path::PathBuf;
 #[derive(Parser, Debug)]
 #[command(
     name = "principia-studio",
-    version = "1.1.0",
+    version = "1.2.0",
     about = "Multithreaded Safe-Rust Computational Mathematics Explorer (Menu-Driven 2D/3D egui Workstation + Headless CLI)"
 )]
 pub struct RootCli {
@@ -22,7 +22,7 @@ pub struct RootCli {
     #[arg(long)]
     pub threads: Option<usize>,
 
-    /// Bypass the interactive 6-Domain Launcher Hub and open the 2D/3D canvas directly
+    /// Bypass the interactive 7-Domain Launcher Hub and open the 2D/3D canvas directly
     #[arg(long, default_value_t = false)]
     pub skip_hub: bool,
 }
@@ -31,7 +31,7 @@ pub struct RootCli {
 pub enum TopCommand {
     /// Launch the interactive 2D/3D egui desktop workstation
     Gui {
-        /// Initial module code (`n1`..`g3`)
+        /// Initial module code (`n1`..`p3`)
         #[arg(short, long, default_value = "n1")]
         module: String,
         /// Rayon worker threads
@@ -50,11 +50,11 @@ pub enum TopCommand {
 
 #[derive(Subcommand, Debug)]
 pub enum CliAction {
-    /// List all 6 mathematical domains and 19 computational modules
+    /// List all 7 mathematical domains and 22 computational modules
     List,
     /// Run a specific mathematical module and optionally export SVG, Wavefront OBJ, or JSON
     Run {
-        /// Module code (`n1`..`n4`, `f1`..`f3`, `s1`..`s3`, `d1`..`d3`, `c1`..`c3`, `g1`..`g3`)
+        /// Module code (`n1`..`n4`, `f1`..`f3`, `s1`..`s3`, `d1`..`d3`, `c1`..`c3`, `g1`..`g3`, `p1`..`p3`)
         #[arg(short, long, default_value = "n1")]
         module: String,
         /// Worker threads (`1..128`)
@@ -99,7 +99,7 @@ pub enum CliAction {
 pub fn run_cli_action(action: CliAction) -> Result<(), String> {
     match action {
         CliAction::List => {
-            println!("Principia Studio v1.1.0 — 19 Multithreaded Mathematical Modules:");
+            println!("Principia Studio v1.2.0 — 22 Multithreaded Mathematical Modules:");
             for cat in DomainCategory::ALL {
                 println!("\n  {}", cat.title());
                 for m in ModuleId::ALL.iter().copied().filter(|m| m.category() == cat) {
@@ -128,7 +128,7 @@ pub fn run_cli_action(action: CliAction) -> Result<(), String> {
         } => {
             let mod_id = ModuleId::from_code(&module).ok_or_else(|| {
                 format!(
-                    "Unknown module code '{module}'. Run `cli list` to inspect valid codes (`n1`..`g3`)."
+                    "Unknown module code '{module}'. Run `cli list` to inspect valid codes (`n1`..`p3`)."
                 )
             })?;
             let mut params = ExplorerParams::default_for(mod_id);

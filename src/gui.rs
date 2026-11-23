@@ -1,10 +1,10 @@
 #![forbid(unsafe_code)]
 
-//! Native Safe-Rust `eframe` / `egui` 0.31 2D/3D Mathematical Explorer Workstation (`v1.1.0`).
+//! Native Safe-Rust `eframe` / `egui` 0.31 2D/3D Mathematical Explorer Workstation (`v1.2.0`).
 //! Features a complete Desktop Menu System:
 //! - Persistent `egui::menu::bar` (`File`, `Domains`, `View`, `Compute`, `Help`) with cascading submenus
-//! - Interactive 6-Domain Campaign & Module Launcher Hub (`AppScreen::LauncherHub`, hotkey `H`, `--skip-hub`)
-//! - `Ctrl+K` / `Cmd+K` Fuzzy Command Palette across all 19 modules, presets, and exports
+//! - Interactive 7-Domain Campaign & Module Launcher Hub (`AppScreen::LauncherHub`, hotkey `H`, `--skip-hub`)
+//! - `Ctrl+K` / `Cmd+K` Fuzzy Command Palette across all 22 modules, presets, and exports
 //! - `B` Multithreaded Scaling Benchmark Modal (`1..N` Rayon threads speedup profiler)
 //! - `Z` Zen Full-Canvas Mode + Independent Left/Right Dock toggles
 //! - `F1` Keyboard Shortcuts & CLI Reference Modal + About Modal
@@ -335,7 +335,7 @@ impl PrincipiaApp {
                 }
             });
 
-            // 2. DOMAINS CASCADING MENU (All 6 Domains & 19 Modules)
+            // 2. DOMAINS CASCADING MENU (All 7 Domains & 22 Modules)
             ui.menu_button("Domains", |ui| {
                 for cat in DomainCategory::ALL {
                     ui.menu_button(cat.title(), |ui| {
@@ -430,7 +430,7 @@ impl PrincipiaApp {
                     ui.close_menu();
                 }
                 ui.separator();
-                if ui.button("About Principia Studio v1.1.0...").clicked() {
+                if ui.button("About Principia Studio v1.2.0...").clicked() {
                     self.show_about_modal = true;
                     ui.close_menu();
                 }
@@ -459,7 +459,7 @@ impl PrincipiaApp {
             ui.add_space(8.0);
             ui.horizontal_wrapped(|ui| {
                 ui.heading(
-                    RichText::new("Principia Studio v1.1.0 — 6-Domain Computational Mathematics Hub")
+                    RichText::new("Principia Studio v1.2.0 — 7-Domain Computational Mathematics Hub")
                         .color(Color32::from_rgb(248, 250, 252)),
                 );
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
@@ -477,7 +477,7 @@ impl PrincipiaApp {
             });
             ui.label(
                 RichText::new(
-                    "Select any of the 19 multithreaded modules below to launch its 2D or 3D interactive observatory, or resume a saved SQLite WAL Workset slot.",
+                    "Select any of the 22 multithreaded modules below to launch its 2D or 3D interactive observatory, or resume a saved SQLite WAL Workset slot.",
                 )
                 .color(Color32::from_rgb(148, 163, 184)),
             );
@@ -565,7 +565,7 @@ impl PrincipiaApp {
                 .show(ctx, |ui| {
                     let resp = ui.add(
                         egui::TextEdit::singleline(&mut self.palette_query)
-                            .hint_text("Type module code (`n1`..`g3`), topic (`sieve`, `groebner`, `knot`, `tda`), or action..."),
+                            .hint_text("Type module code (`n1`..`p3`), topic (`pythagoras`, `cavalieri`, `groebner`, `knot`), or action..."),
                     );
                     resp.request_focus();
                     ui.separator();
@@ -693,8 +693,8 @@ impl PrincipiaApp {
                 .show(ctx, |ui| {
                     egui::Grid::new("hk_grid").striped(true).show(ui, |ui| {
                         for (k, desc) in [
-                            ("Ctrl+K / Cmd+K", "Open fuzzy Command Palette across all 19 modules"),
-                            ("H", "Toggle 6-Domain Startup & Campaign Launcher Hub"),
+                            ("Ctrl+K / Cmd+K", "Open fuzzy Command Palette across all 22 modules"),
+                            ("H", "Toggle 7-Domain Startup & Campaign Launcher Hub"),
                             ("Z", "Toggle Zen Full-Canvas Mode (hide side docks)"),
                             ("2 / 3", "Switch between 2D Scientific Plot & 3D Viewport"),
                             ("O / R", "Toggle Calm 3D Auto-Orbit / Reset 3D Camera"),
@@ -718,19 +718,19 @@ impl PrincipiaApp {
         // 4. About Principia Studio Modal
         if self.show_about_modal {
             let mut open = self.show_about_modal;
-            egui::Window::new("About Principia Studio v1.1.0")
+            egui::Window::new("About Principia Studio v1.2.0")
                 .open(&mut open)
                 .collapsible(false)
                 .resizable(false)
                 .default_width(440.0)
                 .anchor(Align2::CENTER_CENTER, [0.0, 0.0])
                 .show(ctx, |ui| {
-                    ui.heading("Principia Studio v1.1.0");
+                    ui.heading("Principia Studio v1.2.0");
                     ui.label("Multithreaded Safe-Rust Computational Mathematics Observatory");
                     ui.separator();
-                    ui.label("• Safety: `#![forbid(unsafe_code)]` enforced across all 13 Rust modules.");
+                    ui.label("• Safety: `#![forbid(unsafe_code)]` enforced across all 14 Rust modules.");
                     ui.label("• Parallelism: Dedicated `rayon` work-stealing thread pools + non-blocking `mpsc` GUI worker bridge.");
-                    ui.label("• Scope: 6 Mathematical Domains, 19 Interactive 2D/3D Modules (`N1..G3`).");
+                    ui.label("• Scope: 7 Mathematical Domains, 22 Interactive 2D/3D Modules (`N1..P3`).");
                     ui.label("• Persistence: Bundled `rusqlite` WAL slots (`F5`/`F9`) + SHA-256 `.pworkset.json` envelopes.");
                 });
             self.show_about_modal = open;
@@ -1431,7 +1431,7 @@ pub fn launch_gui(
         ..Default::default()
     };
     eframe::run_native(
-        "Principia Studio v1.1.0 — Multithreaded Computational Mathematics Explorer",
+        "Principia Studio v1.2.0 — Multithreaded Computational Mathematics Explorer",
         options,
         Box::new(move |cc| {
             Ok(Box::new(PrincipiaApp::new(

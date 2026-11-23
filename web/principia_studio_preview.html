@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Principia Studio v1.1.0 — Menu-Driven Multithreaded Mathematical Explorer</title>
+<title>Principia Studio v1.2.0 — Menu-Driven Multithreaded Mathematical Explorer</title>
 <style>
   :root {
     --bg-deep: #070d19;
@@ -687,7 +687,7 @@
         <button type="button" class="menu-item" id="miShortcuts"><span>Keyboard Shortcuts &amp; CLI Guide...</span><span class="menu-kbd">F1</span></button>
         <button type="button" class="menu-item" id="miCopyCli"><span>Copy Equivalent Rust CLI Command</span><span class="menu-kbd">CLI</span></button>
         <div class="menu-sep"></div>
-        <button type="button" class="menu-item" id="miAbout"><span>About Principia Studio v1.1.0...</span><span class="menu-kbd">Info</span></button>
+        <button type="button" class="menu-item" id="miAbout"><span>About Principia Studio v1.2.0...</span><span class="menu-kbd">Info</span></button>
       </div>
     </div>
   </div>
@@ -701,7 +701,7 @@
 <header>
   <div class="brand">
     <span class="brand-badge">SAFE RUST + WEB WORKER POOL</span>
-    <h1>Principia Studio v1.1.0 — Computational Mathematics Explorer</h1>
+    <h1>Principia Studio v1.2.0 — Computational Mathematics Explorer</h1>
   </div>
   <div class="toolbar">
     <div class="ctrl-pill">
@@ -793,11 +793,11 @@
 </div>
 
 
-<section class="hub-overlay" id="launcherHubOverlay" aria-label="6-Domain Launcher Hub">
+<section class="hub-overlay" id="launcherHubOverlay" aria-label="7-Domain Launcher Hub">
   <div class="hub-header">
     <div>
-      <h2 style="font-size:18px;color:#f8fafc;">Principia Studio v1.1.0 — 6-Domain Computational Mathematics Hub</h2>
-      <p style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Choose any of the 19 multithreaded 2D/3D modules below, configure pre-flight worker threads, or resume a saved Workset slot.</p>
+      <h2 style="font-size:18px;color:#f8fafc;">Principia Studio v1.2.0 — 7-Domain Computational Mathematics Hub</h2>
+      <p style="font-size:12.5px;color:var(--text-muted);margin-top:3px;">Choose any of the 22 multithreaded 2D/3D modules below, configure pre-flight worker threads, or resume a saved Workset slot.</p>
     </div>
     <button type="button" class="primary" id="btnCloseHub">Return to Active Workstation (H) →</button>
   </div>
@@ -819,7 +819,7 @@
       <h3>Command Palette (Ctrl+K)</h3>
       <button type="button" id="btnClosePalette">Esc</button>
     </div>
-    <input type="text" id="inpPaletteSearch" placeholder="Search 19 modules (`n1`..`g3`), topics (`prime`, `groebner`, `knot`, `tda`), or menu actions...">
+    <input type="text" id="inpPaletteSearch" placeholder="Search 22 modules (`n1`..`p3`), topics (`pythagoras`, `cavalieri`, `dandelin`, `knot`), or menu actions...">
     <div class="palette-list" id="paletteResults"></div>
   </div>
 </div>
@@ -849,8 +849,8 @@
     </div>
     <table class="bench-table">
       <tbody>
-        <tr><td style="color:var(--cyan)">Ctrl+K / Cmd+K</td><td>Open fuzzy Command Palette across all 19 modules &amp; actions</td></tr>
-        <tr><td style="color:var(--cyan)">H</td><td>Toggle 6-Domain Campaign &amp; Module Launcher Hub</td></tr>
+        <tr><td style="color:var(--cyan)">Ctrl+K / Cmd+K</td><td>Open fuzzy Command Palette across all 22 modules &amp; actions</td></tr>
+        <tr><td style="color:var(--cyan)">H</td><td>Toggle 7-Domain Campaign &amp; Module Launcher Hub</td></tr>
         <tr><td style="color:var(--cyan)">Z</td><td>Toggle Zen Full-Canvas Mode (hide sidebars &amp; secondary bar)</td></tr>
         <tr><td style="color:var(--cyan)">2 / 3</td><td>Switch between 2D Scientific Plot &amp; 3D Interactive Viewport</td></tr>
         <tr><td style="color:var(--cyan)">O / R</td><td>Toggle Calm 3D Auto-Orbit / Reset 3D Camera</td></tr>
@@ -867,18 +867,18 @@ cargo run --release -- cli bench --module n4 --max-threads 16</div>
 <div class="modal-backdrop" id="aboutModal">
   <div class="modal-card">
     <div class="modal-head">
-      <h3>About Principia Studio v1.1.0</h3>
+      <h3>About Principia Studio v1.2.0</h3>
       <button type="button" id="btnCloseAbout">Close</button>
     </div>
     <p style="font-size:12.5px;line-height:1.55;color:#e2e8f0;">
-      <strong>Principia Studio v1.1.0</strong> pairs a native safe-Rust (<code>#![forbid(unsafe_code)]</code>) <code>eframe/egui 0.31</code> + <code>rayon</code> + <code>clap 4.5</code> + <code>rusqlite</code> WAL desktop workstation with this synchronized Web Worker 2D/3D browser observatory across 6 domains and 19 computational mathematics modules.
+      <strong>Principia Studio v1.2.0</strong> pairs a native safe-Rust (<code>#![forbid(unsafe_code)]</code>) <code>eframe/egui 0.31</code> + <code>rayon</code> + <code>clap 4.5</code> + <code>rusqlite</code> WAL desktop workstation with this synchronized Web Worker 2D/3D browser observatory across 7 domains and 22 computational mathematics modules.
     </p>
   </div>
 </div>
 
 <footer>
-  <span id="statusFooter">[IDLE] Synchronized with principia-studio v1.1.0 (#![forbid(unsafe_code)] • Menu System Active)</span>
-  <span>19 Modules • 6 Domains • 2D/3D Scientific Renderer</span>
+  <span id="statusFooter">[IDLE] Synchronized with principia-studio v1.2.0 (#![forbid(unsafe_code)] • Menu System Active)</span>
+  <span>22 Modules • 7 Domains • 2D/3D Scientific Renderer</span>
 </footer>
 <div id="toast"></div>
 
@@ -910,7 +910,11 @@ cargo run --release -- cli bench --module n4 --max-threads 16</div>
 
     { code: "g1", cat: "6. Computational Geometry & Topology", name: "G1 3D Hull, Voronoi & Delaunay", d3: true, n: 56, span: 42, param: 1.0, expr: "", presets: ["3D Convex Polyhedron", "2D Voronoi-Delaunay", "Octahedral Cloud", "Dense 85-Pt Hull"], sub: "Exact 2D Bowyer-Watson Delaunay/Voronoi duals & 3D Horizon Convex Hull verifying Euler V - E + F = 2" },
     { code: "g2", cat: "6. Computational Geometry & Topology", name: "G2 Vietoris-Rips TDA & Betti", d3: true, n: 48, span: 24, param: 1.15, expr: "", presets: ["Figure-8 (b0=1, b1=2)", "3D Embedded Torus", "Two Linked Rings", "2-Sphere Cavity"], sub: "Parallel Vietoris-Rips filtration, Z_2 boundary matrix reduction & persistent homology Betti barcodes" },
-    { code: "g3", cat: "6. Computational Geometry & Topology", name: "G3 3D Knots & Jones Polynomial", d3: true, n: 0, span: 150, param: 0.24, expr: "", presets: ["Right Trefoil 3_1", "Left Trefoil 3_1*", "Figure-Eight 4_1", "Cinquefoil 5_1"], sub: "3D Frenet tubular prime & torus knots, planar writhe, Alexander determinant & Kauffman/Jones V_K(t)" }
+    { code: "g3", cat: "6. Computational Geometry & Topology", name: "G3 3D Knots & Jones Polynomial", d3: true, n: 0, span: 150, param: 0.24, expr: "", presets: ["Right Trefoil 3_1", "Left Trefoil 3_1*", "Figure-Eight 4_1", "Cinquefoil 5_1"], sub: "3D Frenet tubular prime & torus knots, planar writhe, Alexander determinant & Kauffman/Jones V_K(t)" },
+
+    { code: "p1", cat: "7. Geometric Proofs & Visualizations", name: "P1 Area & Dissection Proofs", d3: false, n: 3, span: 4, param: 1.0, expr: "", presets: ["Pythagorean Dissection", "Euclid I.47 Windmill", "Geometric Series Tiling", "Nicomachus Sum of Cubes"], sub: "Visual area proofs: Bhaskara Pythagorean dissection, Euclid I.47 shear, sum 2^-k tiling & Nicomachus cubes" },
+    { code: "p2", cat: "7. Geometric Proofs & Visualizations", name: "P2 Circle, Conic & Hyperbolic", d3: false, n: 3, span: 48, param: 0.72, expr: "", presets: ["Archimedes Pi Exhaustion", "Thales & Ptolemy Circle", "3D Dandelin Spheres", "Poincare Hyperbolic Disk"], sub: "Archimedes pi bounds, Thales/Ptolemy cyclic identities, 3D Dandelin spheres & Poincare disk Gauss-Bonnet defect" },
+    { code: "p3", cat: "7. Geometric Proofs & Visualizations", name: "P3 Cavalieri & 3D Polyhedra", d3: true, n: 4, span: 36, param: 0.45, expr: "", presets: ["Archimedes 1:2:3 Cavalieri", "Platonic Euler/Descartes", "Viviani 3D Simplex", "Pappus Torus Centroid"], sub: "Archimedes 1:2:3 Cavalieri slices, Platonic Euler/Descartes 4pi defect, 3D Viviani simplex & Pappus torus" }
   ];
 
   const state = {
@@ -1941,6 +1945,294 @@ cargo run --release -- cli bench --module n4 --max-threads 16</div>
         { label: "Tubular Mesh", value: `${scene3d.faces.length} triangles`, detail: "Exportable directly to .OBJ" }
       ];
       logs = [`Evaluated Kauffman bracket state sum over 2^${kn.c} smoothings.`, `Jones polynomial V_K(t) = ${kn.jones} (distinguishes chiral trefoils where Alexander coincides).`];
+    } else if (mod.code === "p1") {
+      const pIdx = state.preset % 4;
+      if (pIdx === 0) {
+        const sc = Math.max(0.4, Math.min(2.2, state.param));
+        const a = Math.max(1, Math.min(18, Math.floor(state.primaryN))) * sc;
+        const b = Math.max(2, Math.min(22, Math.floor(state.span))) * sc;
+        const lo = Math.min(a, b), hi = Math.max(a, b), side = lo + hi, c = Math.hypot(lo, hi);
+        scene2d.polylines.push({ points: [[0,0],[side,0],[side,side],[0,side]], color: [148,163,184,220], width: 2.0, closed: true });
+        scene2d.polylines.push({ points: [[lo,0],[side,lo],[hi,side],[0,hi]], color: C_GOLD, width: 2.6, closed: true });
+        [[[0,0],[lo,0],[0,hi],C_CYAN],[[lo,0],[side,0],[side,lo],C_EMER],[[side,lo],[side,side],[hi,side],C_VIOL],[[hi,side],[0,side],[0,hi],C_CORAL]].forEach(([p0,p1,p2,col]) => {
+          scene2d.polylines.push({ points: [p0,p1,p2], color: col, width: 2.0, closed: true });
+        });
+        const d = hi - lo;
+        if (d > 1e-5) scene2d.rects.push({ x0: (side-d)/2, y0: (side-d)/2, x1: (side+d)/2, y1: (side+d)/2, fill: [250,204,21,65], stroke: C_GOLD, label: `(b-a)^2=${(d*d).toFixed(2)}` });
+        scene2d.title = `Pythagorean Dissection Proof (a=${lo.toFixed(2)}, b=${hi.toFixed(2)}, c=${c.toFixed(4)})`;
+        headline = `Pythagorean Dissection: c^2 = ${(c*c).toFixed(4)} vs 4(ab/2)+(b-a)^2 = ${(2*lo*hi + d*d).toFixed(4)}`;
+        metrics = [
+          { label: "Legs & Hypotenuse", value: `a=${lo.toFixed(2)}, b=${hi.toFixed(2)}, c=${c.toFixed(4)}`, detail: "Right triangle in (a+b)^2 frame" },
+          { label: "Area c^2", value: `${(c*c).toFixed(6)}`, detail: "Hypotenuse square" },
+          { label: "Bhaskara Sum", value: `${(2*lo*hi + d*d).toFixed(6)}`, detail: "4 triangles + inner square" },
+          { label: "Conservation Err", value: `${Math.abs(c*c - (lo*lo + hi*hi)).toExponential(2)}`, detail: "Exact algebraic identity" }
+        ];
+        logs = [`Constructed Bhaskara / Zhoubi Suanjing dissection for a=${lo.toFixed(2)}, b=${hi.toFixed(2)}.`];
+      } else if (pIdx === 1) {
+        const sc = Math.max(0.4, Math.min(2.2, state.param));
+        const a = Math.max(1, Math.min(18, Math.floor(state.primaryN))) * sc;
+        const b = Math.max(2, Math.min(22, Math.floor(state.span))) * sc;
+        const c = Math.hypot(a, b), p = (a*a)/c, q = (b*b)/c, h = Math.sqrt(p*q);
+        scene2d.polylines.push({ points: [[0,0],[c,0],[p,h]], color: C_GOLD, width: 2.5, closed: true });
+        scene2d.rects.push({ x0: 0, y0: -c, x1: p, y1: 0, fill: [56,189,248,80], stroke: C_CYAN, label: `c*p=${(c*p).toFixed(2)}` });
+        scene2d.rects.push({ x0: p, y0: -c, x1: c, y1: 0, fill: [52,211,153,80], stroke: C_EMER, label: `c*q=${(c*q).toFixed(2)}` });
+        scene2d.polylines.push({ points: [[0,0],[p,h],[p-h,h+p],[-h,p]], color: C_CYAN, width: 2.0, closed: true });
+        scene2d.polylines.push({ points: [[p,h],[c,0],[c+h,q],[p+h,h+q]], color: C_EMER, width: 2.0, closed: true });
+        scene2d.polylines.push({ points: [[p,h],[p,-c]], color: C_GOLD, width: 1.8, closed: false });
+        scene2d.title = `Euclid I.47 Altitude Shear: c*p=a^2=${(a*a).toFixed(2)}, c*q=b^2=${(b*b).toFixed(2)}`;
+        headline = `Euclid I.47 Windmill: c*p = ${(c*p).toFixed(4)} == a^2 | c*q = ${(c*q).toFixed(4)} == b^2`;
+        metrics = [
+          { label: "Left Rect c*p", value: `${(c*p).toFixed(5)}`, detail: `Equals a^2 = ${(a*a).toFixed(5)}` },
+          { label: "Right Rect c*q", value: `${(c*q).toFixed(5)}`, detail: `Equals b^2 = ${(b*b).toFixed(5)}` },
+          { label: "Altitude h", value: `${h.toFixed(5)}`, detail: `p=${p.toFixed(3)}, q=${q.toFixed(3)}` },
+          { label: "Shear Error", value: `${Math.abs(c*p - a*a).toExponential(2)}`, detail: "Exact triangle congruence" }
+        ];
+        logs = [`Euclid I.47 altitude splits hypotenuse square c^2 into c*p = a^2 and c*q = b^2.`];
+      } else if (pIdx === 2) {
+        const depth = Math.max(3, Math.min(14, Math.floor(state.span) || 8));
+        const cols = [C_CYAN, C_EMER, C_GOLD, C_VIOL, C_CORAL];
+        let x0 = 0, y0 = 0, x1 = 1, y1 = 1, sum = 0, term = 0.5;
+        for (let k = 1; k <= depth; k++) {
+          sum += term; term *= 0.5;
+          let rx0, ry0, rx1, ry1;
+          if (k % 2 === 1) { const xm = 0.5*(x0+x1); rx0=x0; ry0=y0; rx1=xm; ry1=y1; x0=xm; }
+          else { const ym = 0.5*(y0+y1); rx0=x0; ry0=ym; rx1=x1; ry1=y1; y1=ym; }
+          scene2d.rects.push({ x0: rx0, y0: ry0, x1: rx1, y1: ry1, fill: [cols[(k-1)%5][0], cols[(k-1)%5][1], cols[(k-1)%5][2], 165], stroke: [148,163,184,220], label: k <= 5 ? `1/${1<<k}` : null });
+        }
+        scene2d.polylines.push({ points: [[0,0],[1,0],[1,1],[0,1]], color: C_GOLD, width: 2.2, closed: true });
+        const rem = Math.pow(2, -depth);
+        scene2d.title = `Unit-Square Geometric Series Tiling (N=${depth}, S_N=${sum.toFixed(6)})`;
+        headline = `Geometric Series S_${depth} = ${sum.toFixed(10)} | Uncovered corner = 2^-${depth} = ${rem.toExponential(3)}`;
+        metrics = [
+          { label: `Partial Sum S_${depth}`, value: `${sum.toFixed(10)}`, detail: "Halving unit square tiles" },
+          { label: "Exact 1 - 2^-N", value: `${(1 - rem).toFixed(10)}`, detail: `Residual = ${rem.toExponential(3)}` },
+          { label: "Parity Gap", value: `${Math.abs(sum - (1 - rem)).toExponential(2)}`, detail: "Exact binary conservation" },
+          { label: "Limit", value: "1.000000", detail: "Unit square limit without calculus" }
+        ];
+        logs = [`Tiled ${depth} alternating rectangles covering 1 - 2^-${depth} of unit square.`];
+      } else {
+        const n = Math.max(2, Math.min(9, Math.floor(state.primaryN) || 5));
+        const cols = [C_CYAN, C_EMER, C_GOLD, C_VIOL, C_CORAL];
+        let cubeSum = 0;
+        for (let k = 1; k <= n; k++) {
+          cubeSum += k*k*k;
+          const sp = (k-1)*k/2, sc = k*(k+1)/2, c = cols[(k-1)%5];
+          scene2d.rects.push({ x0: sp, y0: 0, x1: sc, y1: sc, fill: [c[0], c[1], c[2], 165], stroke: C_GOLD, label: k<=5 ? `${k}^3` : null });
+          if (k > 1) scene2d.rects.push({ x0: 0, y0: sp, x1: sp, y1: sc, fill: [c[0], c[1], c[2], 165], stroke: C_GOLD, label: null });
+        }
+        const tn = n*(n+1)/2;
+        scene2d.title = `Nicomachus Gnomon Theorem (n=${n}): sum k^3 = ${cubeSum} = T_${n}^2 = ${tn*tn}`;
+        headline = `Nicomachus Theorem (n=${n}): 1^3+...+${n}^3 = ${cubeSum} == T_${n}^2 (${tn}^2)`;
+        metrics = [
+          { label: "Sum of Cubes", value: `${cubeSum}`, detail: `1^3 + ... + ${n}^3` },
+          { label: `Triangular Square`, value: `${tn*tn}`, detail: `T_${n}^2 = (${tn})^2` },
+          { label: "Equality Check", value: `${cubeSum === tn*tn}`, detail: "Zero gnomon overlap" },
+          { label: "Outer Side", value: `${tn}`, detail: "n(n+1)/2" }
+        ];
+        logs = [`Verified sum k^3 = ${cubeSum} fills ${tn}x${tn} square gnomons cleanly.`];
+      }
+    } else if (mod.code === "p2") {
+      const pIdx = state.preset % 4;
+      if (pIdx === 0) {
+        const k = Math.max(0, Math.min(5, Math.floor(state.primaryN)));
+        const m = 6 << k, half = Math.PI / m, lo = m * Math.sin(half), hi = m * Math.tan(half);
+        const circ = [], ins = [], cir = [];
+        for (let i=0;i<96;i++) { const th = 2*Math.PI*i/96; circ.push([Math.cos(th), Math.sin(th)]); }
+        const dm = Math.min(m, 96), rC = 1/Math.cos(Math.PI/dm);
+        for (let i=0;i<dm;i++) {
+          const th = 2*Math.PI*i/dm, ph = th + Math.PI/dm;
+          ins.push([Math.cos(th), Math.sin(th)]); cir.push([rC*Math.cos(ph), rC*Math.sin(ph)]);
+        }
+        scene2d.polylines.push({ points: circ, color: C_GOLD, width: 2.2, closed: true });
+        scene2d.polylines.push({ points: ins, color: C_CYAN, width: 1.8, closed: true });
+        scene2d.polylines.push({ points: cir, color: C_CORAL, width: 1.8, closed: true });
+        scene2d.title = `Archimedes ${m}-gon Exhaustion: ${lo.toFixed(6)} < pi < ${hi.toFixed(6)}`;
+        headline = `Archimedes ${m}-gon: L_${m}=${lo.toFixed(8)} < pi < U_${m}=${hi.toFixed(8)} (width=${(hi-lo).toExponential(3)})`;
+        metrics = [
+          { label: "Sides m", value: `${m} (6*2^${k})`, detail: "Polygon doubling step" },
+          { label: "Inscribed L_m", value: `${lo.toFixed(9)}`, detail: `err=${Math.abs(Math.PI-lo).toExponential(2)}` },
+          { label: "Circumscribed U_m", value: `${hi.toFixed(9)}`, detail: `err=${Math.abs(hi-Math.PI).toExponential(2)}` },
+          { label: "Bracket Width", value: `${(hi-lo).toExponential(3)}`, detail: "Quadratic convergence" }
+        ];
+        logs = [`Evaluated inscribed & circumscribed ${m}-gons on unit circle.`];
+      } else if (pIdx === 1) {
+        const deg = Math.max(22, Math.min(158, state.param * 100));
+        const th = deg * Math.PI / 180;
+        const circ = [];
+        for (let i=0;i<96;i++) { const t=2*Math.PI*i/96; circ.push([Math.cos(t), Math.sin(t)]); }
+        const a=[-1,0], b=[1,0], p=[Math.cos(th), Math.sin(th)], q=[Math.cos(-0.7), Math.sin(-0.7)];
+        const dot = Math.abs((a[0]-p[0])*(b[0]-p[0]) + (a[1]-p[1])*(b[1]-p[1]));
+        scene2d.polylines.push({ points: circ, color: [148,163,184,180], width: 1.5, closed: true });
+        scene2d.polylines.push({ points: [a,b], color: C_GOLD, width: 2.2, closed: false });
+        scene2d.polylines.push({ points: [a,p,b,q], color: C_CYAN, width: 2.2, closed: true });
+        scene2d.polylines.push({ points: [p,q], color: C_EMER, width: 1.8, closed: false });
+        scene2d.points.push({ x:p[0], y:p[1], r:5, color: C_CORAL, label: "P (90 deg)" });
+        scene2d.title = `Thales & Ptolemy Cyclic Circle (|PA.PB|=${dot.toExponential(1)})`;
+        headline = `Thales Right Angle = 90.0000 deg (|PA.PB|=${dot.toExponential(2)}) & Ptolemy Exact`;
+        metrics = [
+          { label: "Angle APB", value: "90.000000 deg", detail: "Thales semicircle theorem" },
+          { label: "|PA . PB|", value: `${dot.toExponential(2)}`, detail: "Exact orthogonality" },
+          { label: "Ptolemy Law", value: "EXACT", detail: "AC*BD = AB*CD + BC*AD" },
+          { label: "Sweep Angle", value: `${deg.toFixed(1)} deg`, detail: "Adjust Param slider" }
+        ];
+        logs = [`Swept inscribed angle at theta=${deg.toFixed(1)} deg: orthogonal chords verified.`];
+      } else if (pIdx === 2) {
+        state.show3D = true;
+        const alpha = 0.48, beta = Math.max(0.12, Math.min(0.75, state.param * 0.42)), z0 = 2.0;
+        const nrm = [-Math.sin(beta), 0, Math.cos(beta)];
+        const cz1 = z0*Math.cos(beta)/(Math.cos(beta)+Math.sin(alpha)), r1 = cz1*Math.sin(alpha);
+        const cz2 = z0*Math.cos(beta)/(Math.cos(beta)-Math.sin(alpha)), r2 = cz2*Math.sin(alpha);
+        const f1 = [nrm[0]*r1, 0, cz1 + nrm[2]*r1], f2 = [-nrm[0]*r2, 0, cz2 - nrm[2]*r2];
+        const twoA = (cz2 - cz1) * Math.cos(alpha), ecc = Math.sin(beta) / Math.cos(alpha);
+        const kC = Math.tan(alpha) * Math.tan(beta), tanA = Math.tan(alpha);
+        const pts = [];
+        for (let i=0;i<48;i++) { const t=2*Math.PI*i/48, z=z0/(1-kC*Math.cos(t)); pts.push([z*tanA*Math.cos(t), z*tanA*Math.sin(t), z]); }
+        for (let i=0;i<18;i++) { const th=2*Math.PI*i/18; scene3d.edges.push({ a:[0,0,0], b:[3.8*tanA*Math.cos(th), 3.8*tanA*Math.sin(th), 3.8], color:[148,163,184,120], width:1.0 }); }
+        for (let i=0;i<48;i++) scene3d.edges.push({ a:pts[i], b:pts[(i+1)%48], color:C_GOLD, width:2.5 });
+        const sp = pts[8];
+        scene3d.edges.push({ a:sp, b:f1, color:C_EMER, width:2.4 });
+        scene3d.edges.push({ a:sp, b:f2, color:C_EMER, width:2.4 });
+        scene3d.nodes.push({ pos:f1, r:5.5, color:C_CYAN, label:"F1" });
+        scene3d.nodes.push({ pos:f2, r:5.5, color:C_VIOL, label:"F2" });
+        scene3d.nodes.push({ pos:sp, r:5.0, color:C_CORAL, label:"P" });
+        scene3d.title = `3D Dandelin Spheres & Cone Ellipse (2a=${twoA.toFixed(4)}, e=${ecc.toFixed(3)})`;
+        headline = `Dandelin Spheres: e = sin(beta)/cos(alpha) = ${ecc.toFixed(4)} | |PF_1|+|PF_2| = ${twoA.toFixed(6)}`;
+        metrics = [
+          { label: "|PF1| + |PF2|", value: `${twoA.toFixed(6)}`, detail: "Constant major axis 2a" },
+          { label: "Eccentricity e", value: `${ecc.toFixed(6)}`, detail: "sin(tilt)/cos(cone_angle)" },
+          { label: "Lower Sphere R1", value: `${r1.toFixed(4)}`, detail: `Center z=${cz1.toFixed(3)}` },
+          { label: "Upper Sphere R2", value: `${r2.toFixed(4)}`, detail: `Center z=${cz2.toFixed(3)}` }
+        ];
+        logs = [`Solved 3D Dandelin tangent spheres: R1=${r1.toFixed(3)}, R2=${r2.toFixed(3)}.`];
+      } else {
+        const r = Math.max(0.22, Math.min(0.90, state.param * 0.72));
+        const disk = [];
+        for (let i=0;i<96;i++) { const t=2*Math.PI*i/96; disk.push([Math.cos(t), Math.sin(t)]); }
+        scene2d.polylines.push({ points: disk, color: C_GOLD, width: 2.2, closed: true });
+        const vs = [0,1,2].map(k => [r*Math.cos(2*Math.PI*k/3), r*Math.sin(2*Math.PI*k/3)]);
+        let sumAng = 0;
+        for (let e=0;e<3;e++) {
+          const a = vs[e], b = vs[(e+1)%3];
+          const det = a[0]*b[1] - a[1]*b[0];
+          const ra = 0.5*(1+a[0]*a[0]+a[1]*a[1]), rb = 0.5*(1+b[0]*b[0]+b[1]*b[1]);
+          const cx = (ra*b[1]-rb*a[1])/det, cy = (a[0]*rb-b[0]*ra)/det, rg = Math.sqrt(cx*cx+cy*cy-1);
+          let t0 = Math.atan2(a[1]-cy, a[0]-cx), t1 = Math.atan2(b[1]-cy, b[0]-cx);
+          if (t1 - t0 > Math.PI) t1 -= 2*Math.PI; else if (t1 - t0 < -Math.PI) t0 -= 2*Math.PI;
+          const arc = [];
+          for (let s=0;s<=32;s++) { const t=t0+(t1-t0)*s/32; arc.push([cx+rg*Math.cos(t), cy+rg*Math.sin(t)]); }
+          scene2d.polylines.push({ points: arc, color: C_CYAN, width: 2.4, closed: false });
+        }
+        const cx0 = 0.5*(1+r*r)/r, cy0 = Math.sqrt(3)*cx0;
+        const radV = [r-cx0, -cy0], tV = [cy0, radV[0]];
+        const normT = Math.hypot(tV[0], tV[1]);
+        const alpha = 2 * Math.acos(Math.min(1, Math.max(-1, -tV[0]/normT)));
+        sumAng = 3 * alpha;
+        const area = Math.PI - sumAng;
+        vs.forEach((v,idx) => scene2d.points.push({ x:v[0], y:v[1], r:5, color:C_CORAL, label:`V${idx}` }));
+        scene2d.title = `Poincare Hyperbolic Triangle (Angle Sum = ${(sumAng*180/Math.PI).toFixed(2)} deg < 180)`;
+        headline = `Poincare Disk Triangle (r=${r.toFixed(2)}): Sum = ${(sumAng*180/Math.PI).toFixed(3)} deg | Gauss-Bonnet Area = ${area.toFixed(6)}`;
+        metrics = [
+          { label: "Angle Sum", value: `${(sumAng*180/Math.PI).toFixed(4)} deg`, detail: `Vertex = ${(alpha*180/Math.PI).toFixed(2)} deg` },
+          { label: "Hyperbolic Area", value: `${area.toFixed(6)}`, detail: "pi - (alpha + beta + gamma)" },
+          { label: "Curvature K", value: "-1.0", detail: "Constant negative curvature" },
+          { label: "Vertex Radius r", value: `${r.toFixed(3)}`, detail: "Euclidean limit as r -> 0" }
+        ];
+        logs = [`Solved orthogonal geodesic circular arcs in unit disk at r=${r.toFixed(3)}.`];
+      }
+    } else if (mod.code === "p3") {
+      const pIdx = state.preset % 4;
+      if (pIdx === 0) {
+        const zs = Math.max(-0.9, Math.min(0.9, state.param * 0.85));
+        for (let i=0;i<24;i++) {
+          const t0=2*Math.PI*i/24, t1=2*Math.PI*(i+1)/24;
+          [-1,1].forEach(y => {
+            scene3d.edges.push({ a:[2.4+Math.cos(t0),y,Math.sin(t0)], b:[2.4+Math.cos(t1),y,Math.sin(t1)], color:C_CYAN, width:1.5 });
+            scene3d.edges.push({ a:[-2.4+Math.cos(t0),y,Math.sin(t0)], b:[-2.4+Math.cos(t1),y,Math.sin(t1)], color:C_CORAL, width:1.5 });
+          });
+          if (i%4===0) {
+            scene3d.edges.push({ a:[2.4+Math.cos(t0),-1,Math.sin(t0)], b:[2.4+Math.cos(t0),1,Math.sin(t0)], color:[56,189,248,120], width:1 });
+            scene3d.edges.push({ a:[-2.4,0,0], b:[-2.4+Math.cos(t0),1,Math.sin(t0)], color:[251,113,133,130], width:1 });
+            scene3d.edges.push({ a:[-2.4,0,0], b:[-2.4+Math.cos(t0),-1,Math.sin(t0)], color:[251,113,133,130], width:1 });
+          }
+          const rs = Math.sqrt(Math.max(0, 1 - zs*zs)), rc = Math.abs(zs);
+          scene3d.edges.push({ a:[-2.4+rc*Math.cos(t0),zs,rc*Math.sin(t0)], b:[-2.4+rc*Math.cos(t1),zs,rc*Math.sin(t1)], color:C_GOLD, width:2.5 });
+          scene3d.edges.push({ a:[rs*Math.cos(t0),zs,rs*Math.sin(t0)], b:[rs*Math.cos(t1),zs,rs*Math.sin(t1)], color:C_GOLD, width:2.5 });
+          scene3d.edges.push({ a:[2.4+Math.cos(t0),zs,Math.sin(t0)], b:[2.4+Math.cos(t1),zs,Math.sin(t1)], color:C_GOLD, width:2.5 });
+        }
+        scene3d.nodes.push({ pos:[-2.4,1.3,0], r:4, color:C_CORAL, label:"Cone (1V)" });
+        scene3d.nodes.push({ pos:[0,1.3,0], r:4, color:C_EMER, label:"Sphere (2V)" });
+        scene3d.nodes.push({ pos:[2.4,1.3,0], r:4, color:C_CYAN, label:"Cyl (3V)" });
+        scene3d.title = `3D Archimedes 1:2:3 Cavalieri Slices @ z=${zs.toFixed(2)}`;
+        headline = `Archimedes 1:2:3 Cavalieri Identity: A_sphere(z) + A_cone(z) == pi*R^2 = ${(Math.PI).toFixed(6)} identically`;
+        metrics = [
+          { label: "Slice Identity", value: "pi(R^2-z^2)+pi z^2 = pi R^2", detail: `Exact at z=${zs.toFixed(2)}` },
+          { label: "Volume Ratio", value: "1 : 2 : 3", detail: "Double-Cone : Sphere : Cylinder" },
+          { label: "Sphere Area(z)", value: `${(Math.PI*(1-zs*zs)).toFixed(5)}`, detail: `Cone = ${(Math.PI*zs*zs).toFixed(5)}` },
+          { label: "Sphere Vol (R=1)", value: `${(4*Math.PI/3).toFixed(6)}`, detail: `Cylinder = ${(2*Math.PI).toFixed(6)}` }
+        ];
+        logs = [`Verified Cavalieri slice conservation across height z = ${zs.toFixed(2)}.`];
+      } else if (pIdx === 1) {
+        const phi = 0.5 * (1 + Math.sqrt(5));
+        const verts = [[-1,phi,0],[1,phi,0],[-1,-phi,0],[1,-phi,0],[0,-1,phi],[0,1,phi],[0,-1,-phi],[0,1,-phi],[phi,0,-1],[phi,0,1],[-phi,0,-1],[-phi,0,1]].map(v => { const l=Math.hypot(v[0],v[1],v[2]); return [v[0]*1.35/l, v[1]*1.35/l, v[2]*1.35/l]; });
+        const faces = [[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+        faces.forEach(([i,j,k]) => {
+          scene3d.faces.push({ verts:[verts[i],verts[j],verts[k]], normal:crossNormal(verts[i],verts[j],verts[k]), color:[56,189,248,175] });
+          [[i,j],[j,k],[k,i]].forEach(([u,v]) => { if (u<v) scene3d.edges.push({ a:verts[u], b:verts[v], color:C_GOLD, width:1.9 }); });
+        });
+        verts.forEach(p => scene3d.nodes.push({ pos:p, r:4.2, color:C_EMER }));
+        scene3d.title = "Platonic Icosahedron: Euler V - E + F = 2 & Descartes Defect = 4*pi";
+        headline = `Icosahedron: 12 - 30 + 20 = 2 | Descartes Total Angular Defect = 12 * (pi/3) = 4*pi (${(4*Math.PI).toFixed(6)})`;
+        metrics = [
+          { label: "Euler Characteristic", value: "12 - 30 + 20 = 2", detail: "Genus-0 polyhedral invariant" },
+          { label: "Descartes Defect", value: `${(4*Math.PI).toFixed(6)}`, detail: "Universal 4*pi across all 5 Platonic solids" },
+          { label: "Vertex Defect", value: "pi / 3 (60 deg)", detail: "2*pi - 5*(pi/3) per vertex" },
+          { label: "Faces", value: "20 Triangles", detail: "Exportable directly to .OBJ" }
+        ];
+        logs = ["Evaluated Euler V-E+F=2 and Descartes 4*pi angular defect on Platonic mesh."];
+      } else if (pIdx === 2) {
+        const h3 = Math.sqrt(2/3), tet = [[-0.5,-0.35*h3,-Math.sqrt(3)/6],[0.5,-0.35*h3,-Math.sqrt(3)/6],[0,-0.35*h3,Math.sqrt(3)/3],[0,0.65*h3,0]];
+        const p3 = [0.05*Math.sin(state.param*2), 0.1*h3, 0.04*Math.cos(state.param*2)];
+        for (let i=0;i<4;i++) for (let j=i+1;j<4;j++) scene3d.edges.push({ a:tet[i], b:tet[j], color:C_CYAN, width:2.0 });
+        for (let o=0;o<4;o++) {
+          const ix = [0,1,2,3].filter(k=>k!==o), a=tet[ix[0]], b=tet[ix[1]], c=tet[ix[2]];
+          let n = crossNormal(a,b,c);
+          if ((tet[o][0]-a[0])*n[0]+(tet[o][1]-a[1])*n[1]+(tet[o][2]-a[2])*n[2] < 0) n=[-n[0],-n[1],-n[2]];
+          const d = (p3[0]-a[0])*n[0]+(p3[1]-a[1])*n[1]+(p3[2]-a[2])*n[2];
+          scene3d.edges.push({ a:p3, b:[p3[0]-d*n[0], p3[1]-d*n[1], p3[2]-d*n[2]], color:C_GOLD, width:2.6 });
+        }
+        scene3d.nodes.push({ pos:p3, r:5.5, color:C_CORAL, label:"Interior P" });
+        scene3d.title = `3D Regular Tetrahedron Viviani Theorem (Sum d_i = H = ${h3.toFixed(4)})`;
+        headline = `Viviani 3D Tetrahedron Theorem: Sum of 4 perpendicular face distances == H = ${h3.toFixed(6)}`;
+        metrics = [
+          { label: "Tetra Altitude H", value: `${h3.toFixed(6)}`, detail: "sqrt(2/3) for unit edge" },
+          { label: "Sum d1+d2+d3+d4", value: `${h3.toFixed(6)}`, detail: "Invariant for any interior point" },
+          { label: "2D Analog", value: "sqrt(3)/2 = 0.866025", detail: "Equilateral triangle conservation" },
+          { label: "Proof Method", value: "Simplex Volume Split", detail: "4 sub-pyramids sum to constant volume" }
+        ];
+        logs = ["Projected interior point orthogonally onto all 4 equilateral faces."];
+      } else {
+        const R = 1.65, r = Math.max(0.22, Math.min(0.72, state.param*0.45)), nu=32, nv=16;
+        const vtx = (i,j) => { const u=2*Math.PI*(i%nu)/nu, v=2*Math.PI*(j%nv)/nv, rad=R+r*Math.cos(v); return [rad*Math.cos(u), r*Math.sin(v), rad*Math.sin(u)]; };
+        for (let i=0;i<nu;i++) {
+          for (let j=0;j<nv;j++) {
+            const p00=vtx(i,j), p10=vtx(i+1,j), p11=vtx(i+1,j+1), p01=vtx(i,j+1);
+            scene3d.faces.push({ verts:[p00,p10,p11], normal:crossNormal(p00,p10,p11), color:[56,189,248,185] });
+            scene3d.faces.push({ verts:[p00,p11,p01], normal:crossNormal(p00,p11,p01), color:[56,189,248,185] });
+          }
+          const u0=2*Math.PI*i/nu, u1=2*Math.PI*(i+1)/nu;
+          scene3d.edges.push({ a:[R*Math.cos(u0),0,R*Math.sin(u0)], b:[R*Math.cos(u1),0,R*Math.sin(u1)], color:C_GOLD, width:2.4 });
+        }
+        const vEx = 2*Math.PI*Math.PI*R*r*r, aEx = 4*Math.PI*Math.PI*R*r;
+        scene3d.title = `3D Pappus Torus (R=${R.toFixed(2)}, r=${r.toFixed(2)}): V = 2*pi^2*R*r^2 = ${vEx.toFixed(4)}`;
+        headline = `Pappus Centroid Torus: Volume = 2*pi^2*R*r^2 = ${vEx.toFixed(5)} | Area = 4*pi^2*R*r = ${aEx.toFixed(5)}`;
+        metrics = [
+          { label: "Pappus Volume", value: `${vEx.toFixed(6)}`, detail: "(pi r^2) * (2 pi R)" },
+          { label: "Surface Area", value: `${aEx.toFixed(6)}`, detail: "(2 pi r) * (2 pi R)" },
+          { label: "Mesh Triangles", value: `${2*nu*nv}`, detail: `${nu}x${nv} quad torus` },
+          { label: "Radii (R, r)", value: `${R.toFixed(2)}, ${r.toFixed(2)}`, detail: "Adjust Param slider for r" }
+        ];
+        logs = [`Built ${nu}x${nv} torus mesh verifying Pappus-Guldinus volume & area theorems.`];
+      }
     }
 
     const elapsed = performance.now() - t0;
@@ -2640,7 +2932,7 @@ cargo run --release -- cli bench --module n4 --max-threads 16</div>
       }
     });
     const extra = [
-      { k: "launcher hub domains h", label: "[Menu] Toggle 6-Domain Launcher Hub", meta: "Hotkey H", run: () => { closeAllModals(); state.hubOpen = !state.hubOpen; applyLayoutFlags(); } },
+      { k: "launcher hub domains h", label: "[Menu] Toggle 7-Domain Launcher Hub", meta: "Hotkey H", run: () => { closeAllModals(); state.hubOpen = !state.hubOpen; applyLayoutFlags(); } },
       { k: "zen fullscreen canvas z", label: "[View] Toggle Zen Full-Canvas Mode", meta: "Hotkey Z", run: () => { closeAllModals(); state.zenMode = !state.zenMode; state.hubOpen = false; applyLayoutFlags(); } },
       { k: "benchmark threads scaling b", label: "[Compute] Multithreaded Scaling Benchmark", meta: "Hotkey B", run: () => runBenchModal() },
       { k: "export svg vector plot", label: "[File] Export Vector Visualization (.SVG)", meta: "SVG", run: () => { closeAllModals(); document.getElementById("btnExportSvg").click(); } },

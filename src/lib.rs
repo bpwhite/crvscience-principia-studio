@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 
-//! Principia Studio (`principia-studio` v1.1.0)
+//! Principia Studio (`principia-studio` v1.2.0)
 //! Multithreaded Safe-Rust Computational Mathematics Explorer covering:
 //! 1. Computational Number Theory (`N1`..`N4`)
 //! 2. Formal Verification & Automated Theorem Proving (`F1`..`F3`)
@@ -8,10 +8,12 @@
 //! 4. Numerical Analysis & Differential Equations (`D1`..`D3`)
 //! 5. Combinatorics, Graph Theory & Optimization (`C1`..`C3`)
 //! 6. Computational Geometry & Topology (`G1`..`G3`)
+//! 7. Geometric Proofs & Visualizations (`P1`..`P3`)
 
 pub mod cli;
 pub mod combinatorics_opt;
 pub mod formal_verification;
+pub mod geometric_proofs;
 pub mod geometry_topology;
 pub mod gui;
 pub mod icon;
@@ -34,16 +36,18 @@ pub enum DomainCategory {
     NumericalAnalysis,
     CombinatoricsOpt,
     GeometryTopology,
+    GeometricProofs,
 }
 
 impl DomainCategory {
-    pub const ALL: [DomainCategory; 6] = [
+    pub const ALL: [DomainCategory; 7] = [
         DomainCategory::NumberTheory,
         DomainCategory::FormalVerification,
         DomainCategory::SymbolicAlgebra,
         DomainCategory::NumericalAnalysis,
         DomainCategory::CombinatoricsOpt,
         DomainCategory::GeometryTopology,
+        DomainCategory::GeometricProofs,
     ];
 
     pub fn title(self) -> &'static str {
@@ -54,6 +58,7 @@ impl DomainCategory {
             DomainCategory::NumericalAnalysis => "4. Numerical Analysis & PDEs",
             DomainCategory::CombinatoricsOpt => "5. Combinatorics, Graphs & Opt",
             DomainCategory::GeometryTopology => "6. Computational Geometry & Topology",
+            DomainCategory::GeometricProofs => "7. Geometric Proofs & Visualizations",
         }
     }
 }
@@ -85,10 +90,14 @@ pub enum ModuleId {
     G1SpatialMeshing,
     G2TopologicalDataAnalysis,
     G3KnotTheory,
+    // 7. Geometric Proofs & Visualizations
+    P1AreaDissectionProofs,
+    P2CircleConicNonEuclidean,
+    P3SolidCavalieriPolyhedra,
 }
 
 impl ModuleId {
-    pub const ALL: [ModuleId; 19] = [
+    pub const ALL: [ModuleId; 22] = [
         ModuleId::N1PrimeSieve,
         ModuleId::N2PrimalityTesting,
         ModuleId::N3FactorizationDlp,
@@ -108,6 +117,9 @@ impl ModuleId {
         ModuleId::G1SpatialMeshing,
         ModuleId::G2TopologicalDataAnalysis,
         ModuleId::G3KnotTheory,
+        ModuleId::P1AreaDissectionProofs,
+        ModuleId::P2CircleConicNonEuclidean,
+        ModuleId::P3SolidCavalieriPolyhedra,
     ];
 
     pub fn code(self) -> &'static str {
@@ -131,6 +143,9 @@ impl ModuleId {
             ModuleId::G1SpatialMeshing => "g1",
             ModuleId::G2TopologicalDataAnalysis => "g2",
             ModuleId::G3KnotTheory => "g3",
+            ModuleId::P1AreaDissectionProofs => "p1",
+            ModuleId::P2CircleConicNonEuclidean => "p2",
+            ModuleId::P3SolidCavalieriPolyhedra => "p3",
         }
     }
 
@@ -163,6 +178,9 @@ impl ModuleId {
             ModuleId::G1SpatialMeshing
             | ModuleId::G2TopologicalDataAnalysis
             | ModuleId::G3KnotTheory => DomainCategory::GeometryTopology,
+            ModuleId::P1AreaDissectionProofs
+            | ModuleId::P2CircleConicNonEuclidean
+            | ModuleId::P3SolidCavalieriPolyhedra => DomainCategory::GeometricProofs,
         }
     }
 
@@ -187,6 +205,9 @@ impl ModuleId {
             ModuleId::G1SpatialMeshing => "G1 3D Hull, Voronoi & Delaunay",
             ModuleId::G2TopologicalDataAnalysis => "G2 Vietoris-Rips TDA & Betti",
             ModuleId::G3KnotTheory => "G3 3D Knots & Jones Polynomial",
+            ModuleId::P1AreaDissectionProofs => "P1 Area & Dissection Proofs",
+            ModuleId::P2CircleConicNonEuclidean => "P2 Circle, Conic & Hyperbolic",
+            ModuleId::P3SolidCavalieriPolyhedra => "P3 Cavalieri & 3D Polyhedra",
         }
     }
 
@@ -204,6 +225,7 @@ impl ModuleId {
                 | ModuleId::G1SpatialMeshing
                 | ModuleId::G2TopologicalDataAnalysis
                 | ModuleId::G3KnotTheory
+                | ModuleId::P3SolidCavalieriPolyhedra
         )
     }
 
@@ -266,6 +288,15 @@ impl ModuleId {
             ModuleId::G3KnotTheory => {
                 "3D tubular prime/torus knots, planar writhe, Alexander & Kauffman/Jones invariants (3D Knot Ribbon)"
             }
+            ModuleId::P1AreaDissectionProofs => {
+                "Visual area proofs: Pythagorean dissection, Euclid I.47 windmill, geometric series tiling & Nicomachus cubes (2D + 3D Prisms)"
+            }
+            ModuleId::P2CircleConicNonEuclidean => {
+                "Archimedes pi exhaustion, Thales/Ptolemy cyclic theorems, 3D Dandelin spheres & Poincare disk geodesics (2D + 3D Cone)"
+            }
+            ModuleId::P3SolidCavalieriPolyhedra => {
+                "Archimedes 1:2:3 Cavalieri slice proof, Platonic Euler/Descartes defect, 3D Viviani simplex & Pappus torus (3D + 2D Slices)"
+            }
         }
     }
 }
@@ -320,6 +351,9 @@ impl ExplorerParams {
             ModuleId::G1SpatialMeshing => (64, 48, 1.0, String::new()),
             ModuleId::G2TopologicalDataAnalysis => (72, 24, 1.15, String::new()),
             ModuleId::G3KnotTheory => (0, 160, 0.22, String::new()),
+            ModuleId::P1AreaDissectionProofs => (3, 4, 1.0, String::new()),
+            ModuleId::P2CircleConicNonEuclidean => (3, 48, 0.72, String::new()),
+            ModuleId::P3SolidCavalieriPolyhedra => (4, 36, 0.45, String::new()),
         };
         Self {
             module,
@@ -479,6 +513,13 @@ pub fn execute_module(params: &ExplorerParams) -> ComputationReport {
         ModuleId::G1SpatialMeshing => geometry_topology::run_g1_spatial_meshing(params),
         ModuleId::G2TopologicalDataAnalysis => geometry_topology::run_g2_tda(params),
         ModuleId::G3KnotTheory => geometry_topology::run_g3_knot_theory(params),
+        ModuleId::P1AreaDissectionProofs => geometric_proofs::run_p1_area_dissection(params),
+        ModuleId::P2CircleConicNonEuclidean => {
+            geometric_proofs::run_p2_circle_conic_non_euclidean(params)
+        }
+        ModuleId::P3SolidCavalieriPolyhedra => {
+            geometric_proofs::run_p3_solid_cavalieri_polyhedra(params)
+        }
     });
     report.threads_used = threads;
     report.elapsed_ms = t0.elapsed().as_secs_f64() * 1000.0;

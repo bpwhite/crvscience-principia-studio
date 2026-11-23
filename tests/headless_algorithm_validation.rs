@@ -1,7 +1,7 @@
 #![forbid(unsafe_code)]
 
 //! Comprehensive Headless Mathematical Algorithm Validation Suite for Principia Studio
-//! Exercises all 6 domains (`N1..N4`, `F1..F3`, `S1..S3`, `D1..D3`, `C1..C3`, `G1..G3`)
+//! Exercises all 7 domains (`N1..N4`, `F1..F3`, `S1..S3`, `D1..D3`, `C1..C3`, `G1..G3`, `P1..P3`)
 //! and emits `validation/principia_studio_validation_summary.json` under the 384 KB cap.
 
 mod common;
@@ -14,6 +14,12 @@ use principia_studio::combinatorics_opt::{
 use principia_studio::formal_verification::{
     encode_pythagorean_triples_cnf, encode_ramsey_r33_cnf, eval_polynomial_pcf,
     parse_prop_formula, portfolio_sat_solve, prove_sequent_lk, SatResult,
+};
+use principia_studio::geometric_proofs::{
+    archimedes_exhaustion_pi, cavalieri_sphere_cylinder_cone_verify, dandelin_ellipse_verify,
+    euclid_i47_altitude_verify, geometric_series_tiling_verify, nicomachus_cubes_verify,
+    pappus_torus_verify, platonic_solids_euler_descartes, poincare_hyperbolic_triangle_verify,
+    pythagorean_dissection_verify, thales_ptolemy_verify, viviani_simplex_verify,
 };
 use principia_studio::geometry_topology::{
     bowyer_watson_delaunay_2d, compute_vietoris_rips_persistence, convex_hull_3d,
@@ -660,7 +666,126 @@ fn headless_domain6_geometry_topology_algorithms() {
 }
 
 #[test]
-fn headless_all_19_modules_multithreaded_and_telemetry() {
+fn headless_domain7_geometric_proofs_algorithms() {
+    // 1. P1 Pythagorean dissection + Euclid I.47 + Geometric Series + Nicomachus cubes
+    for &(a, b) in &[(3.0, 4.0), (5.0, 12.0), (8.0, 15.0), (2.7, 6.4)] {
+        let (c, outer, dissected, res) = pythagorean_dissection_verify(a, b);
+        assert!((c * c - (a * a + b * b)).abs() < 1e-12);
+        assert!((outer - dissected).abs() < 1e-12);
+        assert!(res < 1e-12, "Pythagorean dissection residual too large: {res}");
+
+        let (ce, p, q, max_err) = euclid_i47_altitude_verify(a, b);
+        assert!((ce - c).abs() < 1e-12);
+        assert!((ce * p - a * a).abs() < 1e-12);
+        assert!((ce * q - b * b).abs() < 1e-12);
+        assert!(max_err < 1e-12, "Euclid I.47 max error too large: {max_err}");
+    }
+
+    for depth in [1usize, 5, 10, 20] {
+        let (sum, exact, rem) = geometric_series_tiling_verify(depth);
+        assert!((sum - exact).abs() < 1e-12);
+        assert!((sum + rem - 1.0).abs() < 1e-12);
+    }
+
+    for n in 1..=25u64 {
+        let (cube_sum, tri_sq, ok) = nicomachus_cubes_verify(n);
+        assert!(ok, "Nicomachus failed at n={n}");
+        assert_eq!(cube_sum, tri_sq);
+    }
+
+    // 2. P2 Archimedes exhaustion + Thales/Ptolemy + Dandelin spheres + Poincare hyperbolic defect
+    let mut prev_gap = f64::INFINITY;
+    for doublings in 0..=8u32 {
+        let (m, lower, upper, gap) = archimedes_exhaustion_pi(doublings);
+        assert_eq!(m, 6u64 << doublings);
+        assert!(lower < std::f64::consts::PI && std::f64::consts::PI < upper);
+        assert!(gap < prev_gap);
+        prev_gap = gap;
+    }
+
+    for deg in [25.0, 48.5, 90.0, 132.0] {
+        let (thales_dot, ptolemy_err, inscribed_deg) = thales_ptolemy_verify(deg);
+        assert!(thales_dot < 1e-12, "Thales dot residual: {thales_dot}");
+        assert!(ptolemy_err < 1e-12, "Ptolemy identity residual: {ptolemy_err}");
+        assert!((inscribed_deg - 90.0).abs() < 1e-9);
+    }
+
+    for &(alpha, beta) in &[(0.45, 0.25), (0.50, 0.40), (0.35, 0.55)] {
+        let (two_a, ecc, focal_err, tan_err) = dandelin_ellipse_verify(alpha, beta, 128);
+        assert!(two_a > 0.0);
+        assert!(ecc > 0.0 && ecc < 1.0);
+        assert!(focal_err < 1e-9, "Dandelin focal sum error: {focal_err}");
+        assert!(tan_err < 1e-9, "Dandelin tangency error: {tan_err}");
+    }
+
+    let (_, def_small, a_small, k_hyp) = poincare_hyperbolic_triangle_verify(0.25);
+    let (_, def_mid, _, _) = poincare_hyperbolic_triangle_verify(0.60);
+    let (ang_large, def_large, a_large, _) = poincare_hyperbolic_triangle_verify(0.86);
+    assert_eq!(k_hyp, -1.0);
+    assert!(a_small < 60.0 && a_large < a_small);
+    assert!(ang_large < std::f64::consts::PI);
+    assert!(def_small > 0.0 && def_small < def_mid && def_mid < def_large);
+    assert!(def_large > 0.5);
+
+    // 3. P3 Cavalieri 1:2:3 + Platonic Euler/Descartes + Viviani 2D/3D + Pappus Torus
+    let (slice_err, v_sph, v_cyl, ratio_err) = cavalieri_sphere_cylinder_cone_verify(1.5, 120);
+    assert!(slice_err < 1e-12, "Cavalieri slice identity error: {slice_err}");
+    assert!(ratio_err < 1e-4, "Cavalieri 1:2:3 volume ratio error: {ratio_err}");
+    assert!((v_sph - (4.0 / 3.0) * std::f64::consts::PI * 1.5_f64.powi(3)).abs() < 1e-5);
+    assert!((v_cyl - 2.0 * std::f64::consts::PI * 1.5_f64.powi(3)).abs() < 1e-5);
+
+    let platonic = platonic_solids_euler_descartes();
+    assert_eq!(platonic.len(), 5);
+    for (name, v, e, f, chi, defect) in platonic {
+        assert_eq!(v - e + f, 2);
+        assert_eq!(chi, 2, "Euler failure on {name}");
+        assert!(
+            (defect - 4.0 * std::f64::consts::PI).abs() < 1e-10,
+            "Descartes angular defect mismatch on {name}: {defect}"
+        );
+    }
+
+    for &(u, v, w) in &[(0.2, 0.3, 0.5), (0.7, 0.1, 0.2), (0.4, 0.4, 0.2)] {
+        let (e2, e3, h3) = viviani_simplex_verify(u, v, w);
+        assert!(e2 < 1e-12, "Viviani 2D residual: {e2}");
+        assert!(e3 < 1e-12, "Viviani 3D tetrahedron residual: {e3}");
+        assert!((h3 - (2.0_f64 / 3.0).sqrt()).abs() < 1e-12);
+    }
+
+    let (v_exact, v_mesh, a_exact, rel_err) = pappus_torus_verify(2.0, 0.5, 96, 48);
+    assert!((v_exact - std::f64::consts::PI * std::f64::consts::PI).abs() < 1e-11);
+    assert!((a_exact - 4.0 * std::f64::consts::PI * std::f64::consts::PI).abs() < 1e-11);
+    assert!(v_mesh > 0.0);
+    assert!(rel_err < 1.5e-2, "Pappus torus relative error: {rel_err}");
+
+    // 4. Execute all 4 presets across P1, P2, P3
+    for &m in &[
+        ModuleId::P1AreaDissectionProofs,
+        ModuleId::P2CircleConicNonEuclidean,
+        ModuleId::P3SolidCavalieriPolyhedra,
+    ] {
+        for p_idx in 0..4usize {
+            let mut params = ExplorerParams::default_for(m);
+            params.preset_index = p_idx;
+            params.threads = 2;
+            let rep = execute_module(&params);
+            assert!(!rep.headline.trim().is_empty());
+            assert_eq!(rep.metrics.len(), 4);
+            assert!(!rep.log_lines.is_empty());
+            let has_2d = !rep.scene_2d.points.is_empty()
+                || !rep.scene_2d.polylines.is_empty()
+                || !rep.scene_2d.rects.is_empty();
+            let has_3d = !rep.scene_3d.nodes.is_empty()
+                || !rep.scene_3d.edges.is_empty()
+                || !rep.scene_3d.faces.is_empty();
+            assert!(has_2d && has_3d, "Expected both 2D & 3D scenes for {m:?} preset {p_idx}");
+        }
+    }
+}
+
+#[test]
+fn headless_all_22_modules_multithreaded_and_telemetry() {
+    assert_eq!(ModuleId::ALL.len(), 22);
     let mut rows_json = Vec::with_capacity(ModuleId::ALL.len());
     for &m in &ModuleId::ALL {
         let mut p1 = ExplorerParams::default_for(m);
@@ -727,7 +852,7 @@ fn headless_all_19_modules_multithreaded_and_telemetry() {
             "  \"schema_version\": \"1.0\",\n",
             "  \"repo\": \"crvscience-principia-studio\",\n",
             "  \"version\": \"{}\",\n",
-            "  \"domains_verified\": 6,\n",
+            "  \"domains_verified\": 7,\n",
             "  \"modules_verified\": {},\n",
             "  \"modules\": [\n{}\n  ]\n",
             "}}\n"
