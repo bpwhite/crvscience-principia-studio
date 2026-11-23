@@ -115,30 +115,30 @@
   .sidebar {
     background: var(--bg-panel);
     border-right: 1px solid var(--border);
-    padding: 10px;
+    padding: 8px 10px;
     overflow-y: auto;
   }
   .cat-header {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--gold);
-    margin: 10px 4px 5px;
+    margin: 7px 4px 3px;
   }
   .cat-header:first-child { margin-top: 2px; }
   .mod-btn {
     width: 100%;
     text-align: left;
-    padding: 7px 9px;
-    margin-bottom: 3px;
+    padding: 5px 8px;
+    margin-bottom: 2px;
     border-radius: 6px;
     border: 1px solid transparent;
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--text-main);
   }
   .mod-btn:hover { background: var(--bg-card); }
@@ -601,7 +601,7 @@
 <body>
 <nav class="menubar" id="desktopMenuBar" aria-label="Application Menu Bar">
   <div class="menubar-left">
-    <span class="menu-logo">PRINCIPIA v1.1</span>
+    <span class="menu-logo">PRINCIPIA v1.2</span>
 
     <div class="menu-root" data-menu="file">
       <button type="button" class="menu-trigger" id="menuBtnFile">File</button>
@@ -3088,6 +3088,21 @@ cargo run --release -- cli bench --module n4 --max-threads 16</div>
   window.addEventListener("load", () => {
     buildSidebar();
     buildDomainsMenuAndHub();
+    const rawHash = (window.location.hash || "").replace(/^#/, "").trim().toLowerCase();
+    if (rawHash) {
+      const [codePart, presetPart] = rawHash.split(":");
+      const idx = MODULES.findIndex(m => m.code === codePart);
+      if (idx >= 0) {
+        const m = MODULES[idx];
+        state.modIdx = idx;
+        state.preset = presetPart ? (Math.max(0, parseInt(presetPart, 10) || 0) % 4) : 0;
+        state.primaryN = m.n;
+        state.span = m.span;
+        state.param = m.param;
+        state.expr = m.expr;
+        state.show3D = Boolean(m.d3);
+      }
+    }
     syncInspector();
     syncMenuCheckmarks();
     computeCurrentModule();
