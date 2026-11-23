@@ -1,0 +1,29 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{\textbf{Principia Studio: Multithreaded Safe-Rust Computational Mathematics Explorer Across Six Domains and Nineteen Algorithmic Modules}}
+\author{Bryan P. White (ORCID: \href{https://orcid.org/0000-0003-4191-3511}{0000-0003-4191-3511}) \\ CRV Science Labs \\ \small CRV Science Apps Hub: \url{https://crvscience.com/apps} \\ \small DOI: \href{https://doi.org/10.5281/zenodo.24460709}{10.5281/zenodo.24460709}}
+\date{November 2026 \\ \small Preprint ID: APP-PREPRINT-25 (v1.1.0 Software Preprint) \\ \small Categories: math.NA \textbullet{} cs.MS \textbullet{} cs.LO}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Principia Studio (v1.1.0) is a standalone multithreaded safe-Rust computational mathematics workstation released under GPL-3.0-or-later that unifies nineteen parallelized algorithmic modules across six mathematical domains: Computational Number Theory (N1--N4), Formal Verification and Automated Theorem Proving (F1--F3), Symbolic Computation and Computer Algebra (S1--S3), Numerical Analysis and Partial Differential Equations (D1--D3), Combinatorics, Graph Theory, and Optimization (C1--C3), and Computational Geometry and Topology (G1--G3). Each computational engine dispatches work across configurable Rayon worker pools (1..128 threads) and exports identical mathematical structures to both a menu-driven 2D/3D eframe/egui desktop workstation (with interactive Domain Launcher Hub, Ctrl+K Command Palette, Zen mode, and thread-scaling benchmark modal) and a headless clap command-line interface capable of generating standalone SVG, Wavefront OBJ, JSON, and SHA-256 checksummed SQLite WAL workset envelopes. Across 14/14 passing Cargo release tests and live headless CLI verification, Principia Studio confirms exact equivalence among simple, 32 KiB segmented, and Atkin sieves (9,592 primes <= 10\textasciicircum{}5; 78,498 <= 10\textasciicircum{}6; 3,613 primes near 10\textasciicircum{}12 in 6.17 ms), deterministic Miller-Rabin and Baillie-PSW pseudoprime rejection on Carmichael numbers, Ramsey R(3,3) proof (K\_5 SAT / K\_6 UNSAT), Buchberger S-polynomial zero-reduction under Lex and GRevLex orders, 100 exact digits of pi via binary-splitting Chudnovsky paired with Karatsuba-NTT BigInt parity and 4,096-DOF sparse conjugate gradient convergence (5.46e-10 residual), exact OEIS combinatorial counts (up to 369 free octominoes), Bowyer-Watson empty-circumcircle Delaunay invariants, 3D convex hull Euler characteristic chi = 2, topological Betti barcodes, and Jones polynomial knot chirality, while achieving 3.43x speedup from 1 thread (2,434.17 ms) to 4 threads (710.33 ms) on conjecture scans.
+\end{abstract}
+
+\section{Background and Software Architecture}
+Safe-Rust 19-module computational mathematics workstation spanning segmented prime sieves, portfolio CDCL SAT/SMT, Risch calculus \& Groebner bases, Navier-Stokes PDEs \& Chudnovsky pi, LP/MILP \& OEIS combinatorics, and Delaunay/TDA/Jones knot invariants. Open-source code, documentation, and peer applications are indexed on the CRV Science Apps hub at \url{https://crvscience.com/apps}.
+
+\section{Headless Validation Summary}
+All headless integration tests were executed via \texttt{cargo test} and archived directly inside the public repository.
+
+\begin{thebibliography}{10}
+
+\end{thebibliography}
+\end{document}

@@ -1,9 +1,10 @@
 cff-version: 1.2.0
-message: "If you use this software or its validation datasets, please cite both the software repository and the accompanying CRV Science Apps overview."
+message: "If you use this software or its validation datasets, please cite both the software repository and the accompanying CRV Science Apps monograph."
 type: software
 title: "Principia Studio: Multithreaded Safe-Rust Computational Mathematics Explorer (6 Domains, 19 Modules)"
 version: "1.1.0"
 date-released: "2026-11-23"
+doi: "10.5281/zenodo.24460709"
 url: "https://crvscience.com/apps"
 repository-code: "https://github.com/bpwhite/crvscience-principia-studio"
 license: "GPL-3.0-or-later"
@@ -21,9 +22,22 @@ keywords:
   - "combinatorial optimization"
   - "computational topology"
   - "Rust"
+preferred-citation:
+  type: article
+  title: "Principia Studio: Multithreaded Safe-Rust Computational Mathematics Explorer Across Six Domains and Nineteen Algorithmic Modules"
+  authors:
+    - family-names: "White"
+      given-names: "Bryan P."
+      affiliation: "CRV Science Labs"
+      orcid: "https://orcid.org/0000-0003-4191-3511"
+  year: 2026
+  journal: "CRV Science Apps Preprints"
+  doi: "10.5281/zenodo.24460709"
+  url: "https://crvscience.com/apps/preprints/principia-studio-computational-math"
+  notes: "Preprint ID: APP-PREPRINT-25"
 references:
   - type: article
-    title: "The CRV Science App Network: Twenty-Three Open-Source Rust Programs for Science, Data, and Simulation"
+    title: "The CRV Science App Network: Twenty-Four Open-Source Rust Programs for Science, Data, and Simulation"
     authors:
       - family-names: "White"
         given-names: "Bryan P."
