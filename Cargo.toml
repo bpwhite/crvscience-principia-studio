@@ -8,6 +8,7 @@ license = "GPL-3.0-or-later"
 repository = "https://github.com/bpwhite/crvscience-principia-studio"
 homepage = "https://crvscience.com/apps"
 description = "Multithreaded Safe-Rust Computational Mathematics Explorer with Desktop Menu System, 2D/3D egui Workstation, and Headless CLI"
+readme = "README.md"
 
 [lib]
 name = "principia_studio"

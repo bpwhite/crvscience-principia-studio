@@ -8,6 +8,8 @@ Native safe-Rust (`#![forbid(unsafe_code)]`) multithreaded computational mathema
 - **Validation Telemetry**: [validation/principia_studio_validation_summary.json](validation/principia_studio_validation_summary.json)
 - **License**: GNU General Public License v3.0 or later (`GPL-3.0-or-later`, see [LICENSE](LICENSE))
 
+![Principia Studio Workbench](validation/headless_screenshot.png)
+
 ---
 
 ## Quick Start
@@ -85,6 +87,22 @@ cargo run --release -- cli bench --module n4 --max-threads 16
 
 ---
 
-## Citation
+## Citation & CRV Science Apps Hub
 
-If you use **Principia Studio** in academic or software work, please cite [CITATION.cff](CITATION.cff).
+- **CRV Science Apps Hub**: <https://crvscience.com/apps>
+- **Companion Preprint (`APP-PREPRINT-25`)**: *Principia Studio: Multithreaded Safe-Rust Computational Mathematics Explorer Across Seven Domains and Twenty-Two Algorithmic Modules* — <https://crvscience.com/apps/preprints/principia-studio-computational-math>
+- **Concept DOI**: [10.5281/zenodo.24460709](https://doi.org/10.5281/zenodo.24460709) · **Version `v1.2.0` DOI**: [10.5281/zenodo.24464041](https://doi.org/10.5281/zenodo.24464041)
+- **Repository**: <https://github.com/bpwhite/crvscience-principia-studio>
+- **Citation Metadata**: [CITATION.cff](CITATION.cff)
+
+```bibtex
+@article{white2026principiastudio,
+  author  = {White, Bryan P.},
+  title   = {Principia Studio: Multithreaded Safe-Rust Computational Mathematics Explorer Across Seven Domains and Twenty-Two Algorithmic Modules},
+  journal = {CRV Science Apps Preprints},
+  year    = {2026},
+  doi     = {10.5281/zenodo.24464041},
+  url     = {https://crvscience.com/apps/preprints/principia-studio-computational-math},
+  note    = {Preprint ID: APP-PREPRINT-25; Concept DOI: 10.5281/zenodo.24460709; Software version 1.2.0}
+}
+```
