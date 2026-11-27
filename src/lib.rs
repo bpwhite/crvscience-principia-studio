@@ -12,6 +12,7 @@
 
 pub mod cli;
 pub mod combinatorics_opt;
+pub mod digest;
 pub mod formal_verification;
 pub mod geometric_proofs;
 pub mod geometry_topology;

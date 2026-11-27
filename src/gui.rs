@@ -9,6 +9,7 @@
 //! - `Z` Zen Full-Canvas Mode + Independent Left/Right Dock toggles
 //! - `F1` Keyboard Shortcuts & CLI Reference Modal + About Modal
 
+use crate::digest::{build_cross_domain_digest, digest_to_csv, digest_to_json};
 use crate::render3d::{
     export_report_svg, export_scene3d_obj, scene3d_normalization_scale, shade_color, Camera3D,
 };
@@ -218,6 +219,30 @@ impl PrincipiaApp {
         }
     }
 
+    fn export_cross_domain_digest_json(&mut self) {
+        let digest = build_cross_domain_digest(self.params.threads);
+        let path = "principia_cross_domain_digest.json";
+        if let Ok(json) = digest_to_json(&digest) {
+            if fs::write(path, json).is_ok() {
+                self.status_banner = format!(
+                    "Saved 7-Domain / 22-Module Digest JSON to `{path}` (SHA-256: {}...)",
+                    &digest.digest_sha256[..12]
+                );
+            }
+        }
+    }
+
+    fn export_cross_domain_digest_csv(&mut self) {
+        let digest = build_cross_domain_digest(self.params.threads);
+        let path = "principia_cross_domain_digest.csv";
+        let csv = digest_to_csv(&digest);
+        if fs::write(path, csv).is_ok() {
+            self.status_banner = format!(
+                "Saved 7-Domain / 22-Module + P1-P3 Digest CSV to `{path}`"
+            );
+        }
+    }
+
     fn cli_command_string(&self) -> String {
         let mut cmd = format!(
             "cargo run --release -- cli run --module {} --threads {} --preset {} --n {} --span {}",
@@ -325,6 +350,15 @@ impl PrincipiaApp {
                     }
                     if ui.button("Export ComputationReport (.JSON)").clicked() {
                         self.export_json_current();
+                        ui.close_menu();
+                    }
+                    ui.separator();
+                    if ui.button("Export Cross-Domain Digest (.JSON)").clicked() {
+                        self.export_cross_domain_digest_json();
+                        ui.close_menu();
+                    }
+                    if ui.button("Export Cross-Domain Digest (.CSV)").clicked() {
+                        self.export_cross_domain_digest_csv();
                         ui.close_menu();
                     }
                 });
@@ -554,6 +588,8 @@ impl PrincipiaApp {
             let mut trigger_bench = false;
             let mut trigger_svg = false;
             let mut trigger_obj = false;
+            let mut trigger_digest_json = false;
+            let mut trigger_digest_csv = false;
             let mut toggle_zen = false;
 
             egui::Window::new("Command Palette (Ctrl+K)")
@@ -609,6 +645,16 @@ impl PrincipiaApp {
                         {
                             trigger_obj = true;
                         }
+                        if (q.is_empty() || "export cross domain digest json verification".contains(&q))
+                            && ui.button("[Action] Export Cross-Domain Verification Digest (.JSON)").clicked()
+                        {
+                            trigger_digest_json = true;
+                        }
+                        if (q.is_empty() || "export cross domain digest csv verification".contains(&q))
+                            && ui.button("[Action] Export Cross-Domain Verification Digest (.CSV)").clicked()
+                        {
+                            trigger_digest_csv = true;
+                        }
                         if (q.is_empty() || "zen fullscreen toggle".contains(&q))
                             && ui.button("[View] Toggle Zen Full-Canvas Mode (Z)").clicked()
                         {
@@ -631,6 +677,14 @@ impl PrincipiaApp {
             }
             if trigger_obj {
                 self.export_obj_current();
+                open = false;
+            }
+            if trigger_digest_json {
+                self.export_cross_domain_digest_json();
+                open = false;
+            }
+            if trigger_digest_csv {
+                self.export_cross_domain_digest_csv();
                 open = false;
             }
             if toggle_zen {

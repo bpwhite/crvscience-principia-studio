@@ -1,12 +1,20 @@
 #![forbid(unsafe_code)]
 
+use principia_studio::cli::{run_cli_action, CliAction};
 use principia_studio::combinatorics_opt::{
     count_non_isomorphic_graphs, count_reduced_latin_squares, enumerate_free_polyominoes,
     simplex_maximize, tsp_exact_branch_and_bound,
 };
+use principia_studio::digest::{build_cross_domain_digest, digest_to_csv, digest_to_json};
 use principia_studio::formal_verification::{
     encode_pythagorean_triples_cnf, encode_ramsey_r33_cnf, parse_prop_formula, portfolio_sat_solve,
     prove_sequent_lk, SatResult,
+};
+use principia_studio::geometric_proofs::{
+    archimedes_exhaustion_pi, cavalieri_sphere_cylinder_cone_verify, dandelin_ellipse_verify,
+    euclid_i47_altitude_verify, geometric_series_tiling_verify, nicomachus_cubes_verify,
+    pappus_torus_verify, platonic_solids_euler_descartes, poincare_hyperbolic_triangle_verify,
+    pythagorean_dissection_verify, thales_ptolemy_verify, viviani_simplex_verify,
 };
 use principia_studio::geometry_topology::{
     compute_vietoris_rips_persistence, convex_hull_3d, jones_polynomial_from_pd, knot_preset_data,
@@ -200,4 +208,173 @@ fn test_all_22_modules_execute_and_persist() {
         let loaded = vault.load_slot(idx as i64).expect("load slot");
         assert!(loaded.is_some());
     }
+}
+
+#[test]
+fn test_p1_preset0_pythagorean_dissection_and_module_report() {
+    let (c, outer, dissected, res) = pythagorean_dissection_verify(6.0, 8.0);
+    assert!((c - 10.0).abs() < 1e-12);
+    assert!((outer - 100.0).abs() < 1e-12);
+    assert!((dissected - 100.0).abs() < 1e-12);
+    assert!(res < 1e-12);
+
+    let mut params = ExplorerParams::default_for(ModuleId::P1AreaDissectionProofs);
+    params.preset_index = 0;
+    params.threads = 2;
+    let rep = execute_module(&params);
+    assert_eq!(rep.module, ModuleId::P1AreaDissectionProofs);
+    assert!(rep.headline.contains("Pythagorean"));
+    assert!(!rep.scene_2d.polylines.is_empty());
+    assert!(!rep.scene_3d.faces.is_empty());
+}
+
+#[test]
+fn test_p1_preset1_euclid_i47_altitude_shear_preset() {
+    let (ce, p, q, max_err) = euclid_i47_altitude_verify(5.0, 12.0);
+    assert!((ce - 13.0).abs() < 1e-12);
+    assert!((ce * p - 25.0).abs() < 1e-12);
+    assert!((ce * q - 144.0).abs() < 1e-12);
+    assert!(max_err < 1e-12);
+
+    let mut params = ExplorerParams::default_for(ModuleId::P1AreaDissectionProofs);
+    params.preset_index = 1;
+    let rep = execute_module(&params);
+    assert!(rep.headline.contains("Euclid I.47"));
+    assert_eq!(rep.metrics.len(), 4);
+}
+
+#[test]
+fn test_p1_presets2_and_3_geometric_series_and_nicomachus() {
+    let (sum, exact, rem) = geometric_series_tiling_verify(16);
+    assert!((sum - exact).abs() < 1e-12);
+    assert!((sum + rem - 1.0).abs() < 1e-12);
+
+    let (cubes, tri_sq, ok) = nicomachus_cubes_verify(15);
+    assert!(ok);
+    assert_eq!(cubes, tri_sq);
+
+    for p_idx in [2usize, 3] {
+        let mut params = ExplorerParams::default_for(ModuleId::P1AreaDissectionProofs);
+        params.preset_index = p_idx;
+        let rep = execute_module(&params);
+        assert_eq!(rep.metrics.len(), 4);
+        assert!(!rep.scene_2d.rects.is_empty());
+        assert!(!rep.scene_3d.faces.is_empty());
+    }
+}
+
+#[test]
+fn test_p2_presets0_and_1_archimedes_pi_and_thales_ptolemy() {
+    let (m, lo, hi, gap) = archimedes_exhaustion_pi(7);
+    assert_eq!(m, 768);
+    assert!(lo < std::f64::consts::PI && std::f64::consts::PI < hi);
+    assert!(gap < 5e-5);
+
+    let (thales_dot, ptolemy_err, deg) = thales_ptolemy_verify(63.0);
+    assert!(thales_dot < 1e-12);
+    assert!(ptolemy_err < 1e-12);
+    assert!((deg - 90.0).abs() < 1e-9);
+
+    for p_idx in [0usize, 1] {
+        let mut params = ExplorerParams::default_for(ModuleId::P2CircleConicNonEuclidean);
+        params.preset_index = p_idx;
+        let rep = execute_module(&params);
+        assert_eq!(rep.metrics.len(), 4);
+        assert!(!rep.scene_2d.polylines.is_empty());
+    }
+}
+
+#[test]
+fn test_p2_presets2_and_3_dandelin_spheres_and_poincare_hyperbolic() {
+    let (two_a, ecc, focal_err, tan_err) = dandelin_ellipse_verify(0.42, 0.28, 128);
+    assert!(two_a > 0.0 && ecc > 0.0 && ecc < 1.0);
+    assert!(focal_err < 1e-9 && tan_err < 1e-9);
+
+    let (ang_sum, defect_area, alpha_deg, k_hyp) = poincare_hyperbolic_triangle_verify(0.72);
+    assert_eq!(k_hyp, -1.0);
+    assert!(alpha_deg < 60.0);
+    assert!((ang_sum + defect_area - std::f64::consts::PI).abs() < 1e-12);
+
+    for p_idx in [2usize, 3] {
+        let mut params = ExplorerParams::default_for(ModuleId::P2CircleConicNonEuclidean);
+        params.preset_index = p_idx;
+        let rep = execute_module(&params);
+        assert_eq!(rep.metrics.len(), 4);
+        assert!(!rep.scene_3d.nodes.is_empty() || !rep.scene_3d.edges.is_empty());
+    }
+}
+
+#[test]
+fn test_p3_presets0_and_1_cavalieri_and_platonic_descartes() {
+    let (slice_err, v_sph, v_cyl, ratio_err) = cavalieri_sphere_cylinder_cone_verify(2.0, 120);
+    assert!(slice_err < 1e-12);
+    assert!(ratio_err < 1e-4);
+    assert!(v_cyl > v_sph);
+
+    let solids = platonic_solids_euler_descartes();
+    assert_eq!(solids.len(), 5);
+    for (_, _, _, _, chi, defect) in solids {
+        assert_eq!(chi, 2);
+        assert!((defect - 4.0 * std::f64::consts::PI).abs() < 1e-10);
+    }
+
+    for p_idx in [0usize, 1] {
+        let mut params = ExplorerParams::default_for(ModuleId::P3SolidCavalieriPolyhedra);
+        params.preset_index = p_idx;
+        let rep = execute_module(&params);
+        assert_eq!(rep.metrics.len(), 4);
+        assert!(rep.prefer_3d);
+        assert!(!rep.scene_3d.edges.is_empty());
+    }
+}
+
+#[test]
+fn test_p3_presets2_and_3_viviani_simplex_and_pappus_torus() {
+    let (e2, e3, h3) = viviani_simplex_verify(0.25, 0.35, 0.40);
+    assert!(e2 < 1e-12 && e3 < 1e-12);
+    assert!((h3 - (2.0_f64 / 3.0).sqrt()).abs() < 1e-12);
+
+    let (v_exact, v_mesh, _a_exact, rel_err) = pappus_torus_verify(2.5, 0.6, 96, 48);
+    assert!(v_exact > 0.0 && v_mesh > 0.0);
+    assert!(rel_err < 1.5e-2);
+
+    for p_idx in [2usize, 3] {
+        let mut params = ExplorerParams::default_for(ModuleId::P3SolidCavalieriPolyhedra);
+        params.preset_index = p_idx;
+        let rep = execute_module(&params);
+        assert_eq!(rep.metrics.len(), 4);
+        assert!(!rep.scene_3d.faces.is_empty());
+    }
+}
+
+#[test]
+fn test_cli_digest_exports_valid_json_and_csv() {
+    let tmp_dir = std::env::temp_dir().join(format!(
+        "principia_digest_test_{}",
+        std::process::id()
+    ));
+    let _ = std::fs::remove_dir_all(&tmp_dir);
+    std::fs::create_dir_all(&tmp_dir).expect("create tmp dir");
+    let json_path = tmp_dir.join("digest.json");
+    let csv_path = tmp_dir.join("digest.csv");
+
+    run_cli_action(CliAction::Digest {
+        threads: Some(2),
+        export_json: Some(json_path.clone()),
+        export_csv: Some(csv_path.clone()),
+    })
+    .expect("cli digest should succeed");
+
+    let json_raw = std::fs::read_to_string(&json_path).expect("read digest json");
+    let csv_raw = std::fs::read_to_string(&csv_path).expect("read digest csv");
+    assert!(json_raw.contains("\"modules_count\": 22"));
+    assert!(json_raw.contains("\"all_p1_p3_invariants_passed\": true"));
+    assert_eq!(csv_raw.lines().count(), 35);
+
+    let direct = build_cross_domain_digest(2);
+    assert_eq!(direct.modules_count, 22);
+    assert!(digest_to_json(&direct).is_ok());
+    assert_eq!(digest_to_csv(&direct).lines().count(), 35);
+
+    let _ = std::fs::remove_dir_all(&tmp_dir);
 }

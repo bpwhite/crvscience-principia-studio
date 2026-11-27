@@ -1,7 +1,8 @@
 #![forbid(unsafe_code)]
 
-//! Headless Multithreaded CLI (`clap` v4.5) supporting `list`, `run`, `bench`, `--skip-hub`, and SVG/OBJ/JSON Exports.
+//! Headless Multithreaded CLI (`clap` v4.5) supporting `list`, `run`, `bench`, `digest`, `--skip-hub`, and SVG/OBJ/JSON/CSV Exports.
 
+use crate::digest::{build_cross_domain_digest, digest_to_csv, digest_to_json};
 use crate::render3d::{export_report_svg, export_scene3d_obj};
 use crate::{execute_module, DomainCategory, ExplorerParams, ModuleId};
 use clap::{Parser, Subcommand};
@@ -93,6 +94,18 @@ pub enum CliAction {
         /// Maximum thread count to test
         #[arg(long, default_value_t = 8)]
         max_threads: usize,
+    },
+    /// Generate reproducible cross-domain verification & benchmark digest (JSON / CSV)
+    Digest {
+        /// Worker threads (`1..128`)
+        #[arg(short, long)]
+        threads: Option<usize>,
+        /// Export full cross-domain JSON digest
+        #[arg(long)]
+        export_json: Option<PathBuf>,
+        /// Export RFC 4180 CSV digest across 22 modules and 12 P1-P3 proof invariants
+        #[arg(long)]
+        export_csv: Option<PathBuf>,
     },
 }
 
@@ -214,6 +227,56 @@ pub fn run_cli_action(action: CliAction) -> Result<(), String> {
                     break;
                 }
                 t = (t * 2).min(max_threads);
+            }
+            Ok(())
+        }
+        CliAction::Digest {
+            threads,
+            export_json,
+            export_csv,
+        } => {
+            let t = threads.unwrap_or_else(|| {
+                std::thread::available_parallelism()
+                    .map(|n| n.get())
+                    .unwrap_or(4)
+            });
+            let digest = build_cross_domain_digest(t);
+            println!("================================================================================");
+            println!(
+                "Principia Studio v{} Cross-Domain Verification Digest ({} Domains / {} Modules)",
+                digest.version, digest.domains_count, digest.modules_count
+            );
+            println!(
+                "Threads: {} | Total Elapsed: {:.2} ms | P1-P3 Invariants: {} ({}/{}) | SHA-256: {}",
+                digest.threads_requested,
+                digest.total_elapsed_ms,
+                if digest.all_p1_p3_invariants_passed {
+                    "PASS"
+                } else {
+                    "FAIL"
+                },
+                digest.p1_p3_invariants.iter().filter(|i| i.passed).count(),
+                digest.p1_p3_invariants.len(),
+                digest.digest_sha256
+            );
+            println!("--------------------------------------------------------------------------------");
+            for m in &digest.modules {
+                println!(
+                    "  [{:>2}] {:<32} {:>7.2} ms | {}",
+                    m.code, m.short_name, m.elapsed_ms, m.headline
+                );
+            }
+            if let Some(json_path) = export_json {
+                let json = digest_to_json(&digest)?;
+                fs::write(&json_path, json)
+                    .map_err(|e| format!("Failed writing digest JSON to {:?}: {e}", json_path))?;
+                println!("  [Saved Digest JSON] {:?}", json_path);
+            }
+            if let Some(csv_path) = export_csv {
+                let csv = digest_to_csv(&digest);
+                fs::write(&csv_path, csv)
+                    .map_err(|e| format!("Failed writing digest CSV to {:?}: {e}", csv_path))?;
+                println!("  [Saved Digest CSV] {:?}", csv_path);
             }
             Ok(())
         }

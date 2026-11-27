@@ -35,6 +35,9 @@ cargo run --release -- cli run --module p3 --preset 0 --export-obj p3_cavalieri.
 
 # 5. Benchmark thread-pool scaling from 1..N cores
 cargo run --release -- cli bench --module n4 --max-threads 16
+
+# 6. Export reproducible 7-domain / 22-module + Domain 7 (P1-P3) verification digest
+cargo run --release -- cli digest --threads 8 --export-json principia_digest.json --export-csv principia_digest.csv
 ```
 
 ---
@@ -69,6 +72,7 @@ cargo run --release -- cli bench --module n4 --max-threads 16
 | `cli list` | List all 7 domains and 22 modules (`n1`..`p3`) with 2D/3D mode indicators |
 | `cli run --module <code>` | Execute module with `--threads`, `--preset`, `--n`, `--span`, `--param`, `--expr`, and `--export-svg`/`--export-obj`/`--export-json` |
 | `cli bench --module <code>` | Measure wall-clock speedup from `1` up to `--max-threads` Rayon workers |
+| `cli digest` | Emit reproducible SHA-256 cross-domain verification & benchmark digest (`--threads`, `--export-json`, `--export-csv`) across all 22 modules and 12 Domain 7 `P1`–`P3` geometric proof invariants (verified by 26 `--release` tests) |
 | `gui [--module <code>] [--skip-hub]` | Open desktop workstation directly or inside the 7-Domain Hub |
 
 ---
